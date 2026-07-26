@@ -85,7 +85,7 @@ export default function MoneyTest() {
           eyebrow="MONEY TEST"
           title={<>나의 경제력은<br />몇 점일까?</>}
           sub={<>저축, 소비 관리, 금융 이해, 위험 대비.<br />4개 영역을 점수로 확인해보세요.</>}
-          meta="24문항 · 약 3분 · 100점 만점"
+          meta="24문항 · 100점 만점"
           onStart={() => setScreen("quiz")}
         />
       )}

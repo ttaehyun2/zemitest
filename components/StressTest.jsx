@@ -76,7 +76,7 @@ export default function StressTest() {
           eyebrow="STRESS TYPE TEST"
           title={<>나는 스트레스를<br />어떻게 받아내는 사람일까?</>}
           sub={<>스트레스의 크기가 아니라 반응 방식을 봅니다.<br />8가지 유형과 나에게 맞는 힐링 처방까지.</>}
-          meta="24문항 · 약 3분 · 결과 8종"
+          meta="24문항 · 결과 8종"
           onStart={() => setScreen("quiz")}
         />
       )}

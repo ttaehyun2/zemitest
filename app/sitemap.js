@@ -3,7 +3,7 @@ import { ARTICLES } from "../lib/articles";
 const BASE = "https://zemitest.com";
 
 export default function sitemap() {
-  const staticPages = ["", "/tests/love", "/tests/pastlife", "/tests/stress", "/tests/money", "/tests/politics", "/articles", "/about", "/privacy", "/contact"];
+  const staticPages = ["", "/tests", "/tests/love", "/tests/pastlife", "/tests/stress", "/tests/money", "/tests/politics", "/articles", "/about", "/privacy", "/contact"];
   return [
     ...staticPages.map((path) => ({
       url: `${BASE}${path}`,

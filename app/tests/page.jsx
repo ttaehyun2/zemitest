@@ -1,34 +1,39 @@
 import Link from "next/link";
-import { ARTICLES } from "../lib/articles";
-import { TESTS } from "../lib/tests";
+import { TESTS } from "../../lib/tests";
 
-// 카테고리별로 묶어서 보여줌. 테스트 추가는 lib/tests.js 에서만 하면 돼.
+export const metadata = {
+  title: "전체 테스트 - 무료 심리테스트 모음",
+  description:
+    "제미테스트의 모든 심리 테스트를 한곳에서. 연애 세계관, 전생, 스트레스 유형, 정치 성향, 경제력 테스트를 무료로 즐겨보세요.",
+  keywords: ["심리테스트 모음", "무료 테스트", "성향 테스트", "테스트 모음 사이트"],
+  alternates: { canonical: "/tests" },
+};
+
 const CATEGORIES = [
-  { key: "psych", label: "심리 테스트" },
-  { key: "value", label: "성향·가치관 테스트" },
+  { key: "psych", label: "심리 테스트", sub: "성격과 마음을 들여다보는 테스트" },
+  { key: "value", label: "성향·가치관 테스트", sub: "생각과 판단의 기준을 확인하는 테스트" },
 ];
 
-export default function Home() {
+export default function TestsPage() {
+  const ready = TESTS.filter((t) => t.ready).length;
+
   return (
     <>
-      <p className="page-eyebrow">ZEMI TEST</p>
-      <h1 className="page-title">
-        질문 몇 개로
-        <br />
-        나를 알아봅니다
-      </h1>
+      <p className="page-eyebrow">ALL TESTS</p>
+      <h1 className="page-title">전체 테스트</h1>
       <p className="page-lead">
-        연애 스타일부터 정치 성향, 경제관까지. 가볍게 테스트하고 결과는 친구들과
-        공유해보세요. 테스트는 재미로, 해설은 진지하게.
+        현재 {ready}개의 테스트가 준비되어 있습니다. 모두 무료이고 가입 없이 바로
+        할 수 있습니다.
       </p>
 
       {CATEGORIES.map((cat) => {
         const items = TESTS.filter((t) => t.category === cat.key);
-        if (items.length === 0) return null;
+        if (!items.length) return null;
         return (
           <div key={cat.key}>
             <div className="section-head">
               <h2>{cat.label}</h2>
+              <span className="section-sub">{cat.sub}</span>
             </div>
             <div className="grid">
               {items.map((t) =>
@@ -52,22 +57,6 @@ export default function Home() {
           </div>
         );
       })}
-
-      <div className="section-head">
-        <h2>읽을거리</h2>
-        <Link href="/articles">전체 보기 →</Link>
-      </div>
-      <div className="grid">
-        {ARTICLES.slice(0, 3).map((a) => (
-          <Link key={a.slug} href={`/articles/${a.slug}`} className="tile">
-            <h3 className="tile-title">{a.title}</h3>
-            <p className="tile-desc">{a.excerpt}</p>
-            <p className="tile-meta">
-              {a.date} · {a.readMin}분 읽기
-            </p>
-          </Link>
-        ))}
-      </div>
     </>
   );
 }

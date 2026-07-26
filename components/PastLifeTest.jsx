@@ -76,7 +76,7 @@ export default function PastLifeTest() {
           eyebrow="PAST LIFE TEST"
           title={<>전생에 나는<br />무엇이었을까?</>}
           sub={<>28개의 질문으로 찾아가는 나의 전생.<br />12가지 인물 중 당신은 누구였을까요?</>}
-          meta="28문항 · 약 3분 · 결과 12종"
+          meta="28문항 · 결과 12종"
           onStart={() => setScreen("quiz")}
         />
       )}

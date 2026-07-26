@@ -132,7 +132,7 @@ export default function PoliticsTest() {
           eyebrow="POLITICAL COMPASS"
           title={<>나의 정치 성향은<br />어디쯤일까?</>}
           sub={<>경제(분배↔시장)와 사회(권위↔자유),<br />두 개의 축으로 좌표를 찍어봅니다.</>}
-          meta="30문항 · 약 4분 · 5점 척도"
+          meta="30문항 · 2축 좌표 · 결과 5종"
           onStart={() => setScreen("quiz")}
         />
       )}

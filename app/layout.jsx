@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
                 🧩 제미테스트
               </Link>
               <div className="nav-links">
-                <Link href="/tests/love">테스트</Link>
+                <Link href="/tests">테스트</Link>
                 <Link href="/articles">읽을거리</Link>
                 <Link href="/about">소개</Link>
               </div>

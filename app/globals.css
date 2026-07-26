@@ -1041,3 +1041,40 @@ a {
   font-weight: 700;
   opacity: 0.95;
 }
+
+/* ── 더보기 ── */
+.tile-hidden {
+  display: none;
+}
+.more-btn {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 4px auto 44px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.more-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.more-btn:focus-visible {
+  outline: 3px solid #ffb0d8;
+  outline-offset: 2px;
+}
+
+.section-sub {
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-weight: 600;
+  word-break: keep-all;
+}
