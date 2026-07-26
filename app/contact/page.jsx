@@ -1,6 +1,6 @@
 export const metadata = {
   title: "문의하기",
-  description: "연애 세계관 운영자에게 문의하는 방법을 안내합니다.",
+  description: "제미테스트 운영자에게 문의하는 방법을 안내합니다.",
 };
 
 export default function ContactPage() {
@@ -15,9 +15,8 @@ export default function ContactPage() {
       </p>
 
       <h2>이메일</h2>
-      {/* ↓ 반드시 실제로 받을 수 있는 주소를 넣어야 해. 심사에서 확인해. */}
       <p>
-        <span className="fill">[실제 사용 중인 이메일 주소를 넣어주세요]</span>
+        <a href="mailto:leethyeen09@gmail.com">leethyeen09@gmail.com</a>
       </p>
 
       <h2>답변 안내</h2>

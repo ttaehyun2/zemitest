@@ -1,6 +1,6 @@
 export const metadata = {
   title: "개인정보처리방침",
-  description: "연애 세계관의 개인정보 수집 및 이용, 쿠키와 광고 관련 정책을 안내합니다.",
+  description: "제미테스트의 개인정보 수집 및 이용, 쿠키와 광고 관련 정책을 안내합니다.",
 };
 
 export default function PrivacyPage() {
@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <h1 className="page-title">개인정보처리방침</h1>
 
       <p>
-        연애 세계관(이하 &lsquo;사이트&rsquo;)은 이용자의 개인정보를 중요하게
+        제미테스트(이하 &lsquo;사이트&rsquo;)는 이용자의 개인정보를 중요하게
         생각하며, 관련 법령을 준수하기 위해 노력합니다. 본 방침은 사이트가 어떤
         정보를 수집하고 어떻게 이용하는지 안내합니다.
       </p>
@@ -86,10 +86,9 @@ export default function PrivacyPage() {
       </p>
 
       <h2>8. 문의처</h2>
-      {/* ↓ 실제 이메일 넣기 */}
       <p>
         개인정보 관련 문의:{" "}
-        <span className="fill">[실제 이메일 주소를 넣어주세요]</span>
+        <a href="mailto:leethyeen09@gmail.com">leethyeen09@gmail.com</a>
       </p>
 
       <h2>9. 방침의 변경</h2>
@@ -97,10 +96,7 @@ export default function PrivacyPage() {
         본 방침이 변경되는 경우 변경 사항을 이 페이지에 게시합니다.
       </p>
 
-      {/* ↓ 실제 배포한 날짜로 바꾸기 */}
-      <p>
-        시행일: <span className="fill">[배포한 날짜를 넣어주세요]</span>
-      </p>
+      <p>시행일: 2026년 7월 25일</p>
     </div>
   );
 }

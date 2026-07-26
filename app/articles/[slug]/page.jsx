@@ -32,13 +32,23 @@ function Block({ block }) {
           ))}
         </ul>
       );
-    case "mine":
-      // 배포 전에 실제 내용으로 바꿔야 하는 자리
+    case "faq":
       return (
-        <div className="mine">
-          <p className="mine-title">{block.title}</p>
-          <p className="mine-text">{block.text}</p>
+        <div className="faq">
+          {block.items.map((it, i) => (
+            <div className="faq-item" key={i}>
+              <p className="faq-q">Q. {it.q}</p>
+              <p className="faq-a">{it.a}</p>
+            </div>
+          ))}
         </div>
+      );
+    case "note":
+      return (
+        <aside className="note">
+          <p className="note-title">{block.title}</p>
+          <p className="note-text">{block.text}</p>
+        </aside>
       );
     default:
       return null;

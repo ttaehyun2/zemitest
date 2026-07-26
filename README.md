@@ -1,6 +1,6 @@
-# 연애 세계관 (love-universe)
+# 제미테스트 (zemitest.com)
 
-연애 심리 테스트 + 읽을거리 사이트. Next.js App Router 기반.
+성향 테스트 모음 사이트. Next.js App Router 기반.
 
 ## 실행
 
@@ -19,11 +19,23 @@ npm run dev
 
 ## 애드센스 신청 전 반드시 할 것
 
-- [ ] `lib/articles.js` 안의 `type: "mine"` 블록 3개를 내 이야기로 교체
-- [ ] `app/about/page.jsx` 운영자 소개 채우기
-- [ ] `app/contact/page.jsx` 실제 이메일 넣기
-- [ ] `app/privacy/page.jsx` 이메일, 시행일 채우기
+- [x] 운영자 소개 / 이메일 / 시행일 채움
 - [ ] `app/layout.jsx` 의 metadataBase 를 실제 도메인으로 변경
-- [ ] 테스트 최소 5~6개까지 늘리기 (홈의 "COMING SOON" 자리)
+- [x] 테스트 3개 완성 (연애 20문항 / 경제력 24문항 / 정치 30문항)
+- [ ] 테스트 5~6개까지 늘리기 (전생, 스트레스 남음)
 - [ ] 글 8~10개까지 늘리기
 - [ ] Google Search Console 등록 + 색인 확인
+
+## 테스트 추가하는 법
+
+1. `lib/새테스트.js` — 문항/결과 데이터
+2. `components/새테스트.jsx` — `QuizShell`의 Intro/QuestionCard/Bar 재사용
+3. `app/tests/새경로/page.jsx` — 페이지
+4. `lib/tests.js` 에 한 줄 추가 → 홈에 자동 노출
+5. `app/sitemap.js` 의 staticPages 에 경로 추가
+
+## 검색엔진 등록
+
+`app/layout.jsx` 의 verification 항목에 코드를 넣으면 됨:
+- google: 구글 서치콘솔 HTML 태그 방식의 content 값
+- naver-site-verification: 네이버 서치어드바이저 값
