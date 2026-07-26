@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import Stars from "./Stars";
 import { Intro, QuestionCard } from "./QuizShell";
 import { QUESTIONS, SCALE, MAX, classify } from "../lib/politicsTest";
@@ -186,6 +187,11 @@ export default function PoliticsTest() {
             입장을 지지하거나 권유하지 않습니다. 문항은 양쪽 방향이 비슷한 수로
             구성되어 있습니다.
           </p>
+
+          <Link href="/articles/left-right-origin" className="lu-readmore">
+            <span>좌파와 우파, 그 말은 어디서 왔을까</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
 
           <div className="lu-actions">
             <button className="lu-btn lu-share" onClick={share}>

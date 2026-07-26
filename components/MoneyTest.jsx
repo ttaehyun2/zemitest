@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import Stars from "./Stars";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
@@ -155,6 +156,11 @@ export default function MoneyTest() {
             이 테스트는 금융 습관을 돌아보기 위한 참고용입니다. 투자 판단이나
             재무 상담을 대신하지 않습니다.
           </p>
+
+          <Link href="/articles/compound-interest" className="lu-readmore">
+            <span>복리는 왜 대부분 체감되지 않을까</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
 
           <div className="lu-actions">
             <button className="lu-btn lu-share" onClick={share}>

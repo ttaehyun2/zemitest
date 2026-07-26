@@ -12,7 +12,14 @@ export function generateMetadata({ params }) {
   return {
     title: article.title,
     description: article.excerpt,
-    openGraph: { title: article.title, description: article.excerpt, type: "article" },
+    alternates: { canonical: `/articles/${article.slug}` },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      type: "article",
+      url: `https://zemitest.com/articles/${article.slug}`,
+      publishedTime: article.date,
+    },
   };
 }
 
@@ -59,8 +66,25 @@ export default function ArticlePage({ params }) {
   const article = getArticle(params.slug);
   if (!article) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: article.date,
+    dateModified: article.date,
+    inLanguage: "ko-KR",
+    author: { "@type": "Organization", name: "제미테스트" },
+    publisher: { "@type": "Organization", name: "제미테스트" },
+    mainEntityOfPage: `https://zemitest.com/articles/${article.slug}`,
+  };
+
   return (
     <article className="article">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="article-head">
         <p className="page-eyebrow">연애 심리</p>
         <h1>{article.title}</h1>
