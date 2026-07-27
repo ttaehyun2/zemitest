@@ -129,10 +129,6 @@ export default function StressTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
-          <Link href="/articles/stop-rumination" className="lu-readmore">
-            <span>생각이 멈추지 않을 때: 반추를 끊는 법</span>
-            <span className="lu-readmore-arrow">→</span>
-          </Link>
 
           <div className="lu-actions">
             <ShareButtons

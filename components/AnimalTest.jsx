@@ -5,9 +5,9 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
-import { TYPES, QUESTIONS, scoreToRanked } from "../lib/pastLifeTest";
+import { TYPES, QUESTIONS, scoreToRanked } from "../lib/animalTest";
 
-export default function PastLifeTest() {
+export default function AnimalTest() {
   const [screen, setScreen] = useState("intro");
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
@@ -16,7 +16,7 @@ export default function PastLifeTest() {
   const result = useMemo(() => {
     if (screen !== "result") return null;
     const ranked = scoreToRanked(scores);
-    return { top: ranked[0], ranked, others: ranked.slice(1, 5) };
+    return { top: ranked[0], others: ranked.slice(1, 4) };
   }, [screen, scores]);
 
   function pick(i) {
@@ -51,11 +51,11 @@ export default function PastLifeTest() {
 
       {screen === "intro" && (
         <Intro
-          emoji="🔮"
-          eyebrow="PAST LIFE TEST"
-          title={<>전생에 나는<br />무엇이었을까?</>}
-          sub={<>28개의 질문으로 찾아가는 나의 전생.<br />12가지 인물 중 당신은 누구였을까요?</>}
-          meta="28문항 · 결과 12종"
+          emoji="🐾"
+          eyebrow="ANIMAL TEST"
+          title={<>나와 닮은 동물은<br />무엇일까?</>}
+          sub={<>27개의 질문으로 찾는 나의 동물.<br />16가지 동물 중 나는 누구를 닮았을까요?</>}
+          meta="27문항 · 결과 16종"
           onStart={() => setScreen("quiz")}
         />
       )}
@@ -79,20 +79,35 @@ export default function PastLifeTest() {
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
             }}
           >
-            <p className="lu-result-eyebrow">나의 전생은</p>
+            <p className="lu-result-eyebrow">나와 닮은 동물</p>
             <div className="lu-orb" style={{ boxShadow: `0 0 60px 10px ${result.top.glow}` }}>
               <span>{result.top.emoji}</span>
             </div>
             <h2 className="lu-result-name">{result.top.name}</h2>
             <p className="lu-result-bigpct">{result.top.pct}%</p>
             <p className="lu-result-tagline">&ldquo;{result.top.tagline}&rdquo;</p>
-
-            <p className="era-tag">📍 {result.top.era}</p>
-
             <p className="lu-result-desc">{result.top.desc}</p>
 
+            <div className="info-box">
+              <p className="info-title">✨ 이 동물의 강점</p>
+              <ul className="remedy-list">
+                {result.top.strengths.map((x, i) => (
+                  <li key={i}>{x}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="info-box">
+              <p className="info-title">⚠️ 주의할 점</p>
+              <ul className="remedy-list">
+                {result.top.cautions.map((x, i) => (
+                  <li key={i}>{x}</li>
+                ))}
+              </ul>
+            </div>
+
             <div className="lu-bars">
-              <p className="lu-bars-title">그 다음으로 가까운 전생</p>
+              <p className="lu-bars-title">나에게 섞여 있는 다른 동물</p>
               {result.others.map((t) => (
                 <Bar key={t.key} label={`${t.emoji} ${t.name}`} pct={t.pct} />
               ))}
@@ -100,7 +115,7 @@ export default function PastLifeTest() {
 
             <div className="lu-match-row">
               <div className="lu-match">
-                <p className="lu-match-label">전생의 인연 🤝</p>
+                <p className="lu-match-label">환상의 짝꿍 🤝</p>
                 <p className="lu-match-type">
                   {TYPES[result.top.best].emoji} {TYPES[result.top.best].name}
                 </p>
@@ -112,30 +127,29 @@ export default function PastLifeTest() {
             </div>
 
             <div className="lu-tip">
-              <span className="lu-tip-label">이번 생을 위한 조언</span>
-              <span className="lu-tip-text">{result.top.advice}</span>
+              <span className="lu-tip-label">한마디</span>
+              <span className="lu-tip-text">{result.top.tip}</span>
             </div>
 
             <p className="lu-watermark">zemitest.com</p>
           </div>
 
-          <Link href={`/tests/pastlife/types#${result.top.key}`} className="lu-readmore lu-readmore-main">
-            <span>내 전생 자세히 보기</span>
+          <Link href={`/tests/animal/types#${result.top.key}`} className="lu-readmore lu-readmore-main">
+            <span>16가지 동물 전부 보기</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
-
           <div className="lu-actions">
             <ShareButtons
-              text={`나의 전생은 「${t.emoji} ${t.name}」 (일치도 ${t.pct}%)\n"${t.tagline}"\n\n너의 전생도 알아봐 🔮`}
-              url="https://zemitest.com/tests/pastlife"
-              title="전생 테스트"
+              text={`나와 닮은 동물은 「${result.top.emoji} ${result.top.name}」 ${result.top.pct}%\n"${result.top.tagline}"\n\n너는 어떤 동물인지 알아봐 🐾`}
+              url="https://zemitest.com/tests/animal"
+              title="나와 닮은 동물 테스트"
             />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>
           </div>
-          <p className="lu-mini lu-center">친구의 전생과 인연이 맞는지 확인해보세요 🔮</p>
+          <p className="lu-mini lu-center">친구는 어떤 동물인지도 확인해보세요 🐾</p>
         </div>
       )}
     </div>

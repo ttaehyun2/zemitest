@@ -3,7 +3,7 @@ import PoliticsTest from "../../../components/PoliticsTest";
 export const metadata = {
   title: "정치 성향 테스트 - 나의 정치 좌표는? (무료)",
   description:
-    "30문항 무료 정치 성향 테스트. 경제(분배↔시장)와 사회(권위↔자유) 두 축으로 나의 정치 좌표를 찍고 퍼센트로 확인해보세요.",
+    "30문항 무료 정치 성향 테스트. 진보↔보수, 자유↔사회 두 축으로 나의 정치 좌표를 찍고 퍼센트로 확인해보세요.",
   keywords: [
     "정치성향 테스트",
     "정치 좌표 테스트",

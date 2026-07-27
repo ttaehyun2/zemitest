@@ -45,9 +45,9 @@ function Compass({ econPct, socPct }) {
 
       {/* 축 라벨 */}
       <text x={size / 2} y={14} textAnchor="middle" className="compass-label">자유</text>
-      <text x={size / 2} y={size - 4} textAnchor="middle" className="compass-label">권위</text>
-      <text x={8} y={size / 2} textAnchor="start" className="compass-label">분배</text>
-      <text x={size - 8} y={size / 2} textAnchor="end" className="compass-label">시장</text>
+      <text x={size / 2} y={size - 4} textAnchor="middle" className="compass-label">사회</text>
+      <text x={8} y={size / 2} textAnchor="start" className="compass-label">진보</text>
+      <text x={size - 8} y={size / 2} textAnchor="end" className="compass-label">보수</text>
 
       {/* 내 위치 */}
       <circle cx={x} cy={y} r="11" fill="rgba(255,255,255,0.35)" />
@@ -77,9 +77,9 @@ export default function PoliticsTest() {
       econPct,
       socPct,
       quad: classify(econPct, socPct),
-      econLabel: econPct >= 50 ? "시장·보수" : "분배·진보",
+      econLabel: econPct >= 50 ? "보수" : "진보",
       econVal: econPct >= 50 ? econPct : 100 - econPct,
-      socLabel: socPct >= 50 ? "자유" : "권위·전통",
+      socLabel: socPct >= 50 ? "자유" : "사회",
       socVal: socPct >= 50 ? socPct : 100 - socPct,
     };
   }, [screen, answers]);
@@ -111,7 +111,7 @@ export default function PoliticsTest() {
           emoji="🗳️"
           eyebrow="POLITICAL COMPASS"
           title={<>나의 정치 성향은<br />어디쯤일까?</>}
-          sub={<>경제(분배↔시장)와 사회(권위↔자유),<br />두 개의 축으로 좌표를 찍어봅니다.</>}
+          sub={<>진보↔보수, 자유↔사회.<br />두 개의 축으로 나의 좌표를 찍어봅니다.</>}
           meta="30문항 · 2축 좌표 · 결과 5종"
           onStart={() => setScreen("quiz")}
         />
@@ -173,10 +173,6 @@ export default function PoliticsTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
-          <Link href="/articles/left-right-origin" className="lu-readmore">
-            <span>좌파와 우파, 그 말은 어디서 왔을까</span>
-            <span className="lu-readmore-arrow">→</span>
-          </Link>
 
           <div className="lu-actions">
             <ShareButtons

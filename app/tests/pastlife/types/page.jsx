@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/pastLifeTest";
 
@@ -36,6 +37,15 @@ export default function Page() {
         좋고 나쁨이 없으며, 각자 다른 방식으로 세상을 살아낸 사람들입니다.
       </p>
       <TypeDirectory items={items} backHref="/tests/pastlife" backLabel="전생 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/why-past-life" className="tile">
+          <h3 className="tile-title">우리는 왜 전생 이야기에 끌릴까</h3>
+        </Link>
+      </div>
+
     </>
   );
 }

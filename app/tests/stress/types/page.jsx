@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/stressTest";
 
@@ -35,6 +36,15 @@ export default function Page() {
         어떤 방식도 그 자체로 잘못된 것은 아니며, 상황에 맞게 쓰는 것이 중요합니다.
       </p>
       <TypeDirectory items={items} backHref="/tests/stress" backLabel="스트레스 유형 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/stop-rumination" className="tile">
+          <h3 className="tile-title">생각이 멈추지 않을 때: 반추를 끊는 법</h3>
+        </Link>
+      </div>
+
       <p className="disclaimer">
         이 내용은 일반적인 정보이며 진단이나 치료를 대신하지 않습니다. 힘든 상태가
         오래 이어진다면 가까운 사람이나 전문가에게 이야기해보시기를 권합니다.

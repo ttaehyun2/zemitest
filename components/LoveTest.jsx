@@ -130,10 +130,6 @@ export default function LoveTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
-          <Link href={`/articles/${result.top.article}`} className="lu-readmore">
-            <span>이 유형에 대해 더 알아보기</span>
-            <span className="lu-readmore-arrow">→</span>
-          </Link>
 
           <div className="lu-actions">
             <ShareButtons

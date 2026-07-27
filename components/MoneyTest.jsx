@@ -167,10 +167,6 @@ export default function MoneyTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
-          <Link href="/articles/compound-interest" className="lu-readmore">
-            <span>복리는 왜 대부분 체감되지 않을까</span>
-            <span className="lu-readmore-arrow">→</span>
-          </Link>
 
           <div className="lu-actions">
             <ShareButtons

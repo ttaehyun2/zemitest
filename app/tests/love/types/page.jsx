@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/loveTest";
 
@@ -37,6 +38,21 @@ export default function Page() {
         함께 읽어보면 더 잘 맞습니다.
       </p>
       <TypeDirectory items={items} backHref="/tests/love" backLabel="연애 세계관 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/fast-love" className="tile">
+          <h3 className="tile-title">금사빠는 왜 그렇게 빨리 식을까</h3>
+        </Link>
+        <Link href="/articles/push-pull" className="tile">
+          <h3 className="tile-title">밀당은 진짜 효과가 있을까</h3>
+        </Link>
+        <Link href="/articles/wall-type" className="tile">
+          <h3 className="tile-title">철벽형은 왜 마음을 열지 못할까</h3>
+        </Link>
+      </div>
+
     </>
   );
 }

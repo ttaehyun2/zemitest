@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { GRADES, AREAS } from "../../../../lib/moneyTest";
 
@@ -47,6 +48,15 @@ export default function Page() {
         <h2>등급별 설명</h2>
       </div>
       <TypeDirectory items={items} backHref="/tests/money" backLabel="경제력 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/compound-interest" className="tile">
+          <h3 className="tile-title">복리는 왜 대부분 체감되지 않을까</h3>
+        </Link>
+      </div>
+
       <p className="disclaimer">
         이 테스트는 금융 습관을 돌아보기 위한 참고용이며, 투자 판단이나 재무 상담을
         대신하지 않습니다.
