@@ -35,12 +35,16 @@ export const metadata = {
     description:
       "연애 세계관, 경제력, 정치 성향까지. 질문 몇 개로 나를 알아보는 무료 심리 테스트를 지금 시작해보세요!",
     url: "https://zemitest.com",
+    images: [
+      { url: "/og/default.png", width: 1200, height: 630, alt: "제미테스트" },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "제미테스트 - 무료 심리 테스트 모음",
     description:
       "연애 세계관, 경제력, 정치 성향까지. 질문 몇 개로 나를 알아보는 무료 심리 테스트.",
+    images: ["/og/default.png"],
   },
   robots: {
     index: true,

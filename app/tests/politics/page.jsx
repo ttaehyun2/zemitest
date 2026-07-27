@@ -12,11 +12,13 @@ export const metadata = {
     "무료 정치테스트",
     "이념 성향 테스트",
   ],
+  twitter: { card: "summary_large_image", images: ["/og/politics.png"] },
   alternates: { canonical: "/tests/politics" },
   openGraph: {
     title: "정치 성향 좌표 테스트 - 나의 정치 좌표는?",
     description: "30문항으로 찍어보는 나의 정치 성향 좌표. 경제축과 사회축 퍼센트까지 무료로 확인!",
     url: "https://zemitest.com/tests/politics",
+    images: [{ url: "/og/politics.png", width: 1200, height: 630 }],
   },
 };
 

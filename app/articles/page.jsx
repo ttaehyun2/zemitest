@@ -6,6 +6,13 @@ export const metadata = {
   description:
     "연애 심리, 스트레스 대처, 정치 성향, 돈 관리까지. 테스트 결과 뒤에 있는 이야기를 정리한 글 모음입니다.",
   alternates: { canonical: "/articles" },
+  openGraph: {
+    title: "읽을거리 - 제미테스트",
+    description: "테스트 결과 뒤에 있는 심리와 성향 이야기.",
+    url: "https://zemitest.com/articles",
+    images: [{ url: "/og/articles.png", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/articles.png"] },
 };
 
 export default function ArticlesPage() {

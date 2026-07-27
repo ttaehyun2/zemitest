@@ -12,11 +12,13 @@ export const metadata = {
     "무료 경제 테스트",
     "소비 성향 테스트",
   ],
+  twitter: { card: "summary_large_image", images: ["/og/money.png"] },
   alternates: { canonical: "/tests/money" },
   openGraph: {
     title: "경제력 테스트 - 나의 금융 습관 점수는?",
     description: "24문항으로 진단하는 나의 경제력 100점 만점 점수. 지금 무료로 확인해보세요!",
     url: "https://zemitest.com/tests/money",
+    images: [{ url: "/og/money.png", width: 1200, height: 630 }],
   },
 };
 

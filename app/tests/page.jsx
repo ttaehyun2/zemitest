@@ -7,6 +7,13 @@ export const metadata = {
     "제미테스트의 모든 심리 테스트를 한곳에서. 연애 세계관, 전생, 스트레스 유형, 정치 성향, 경제력 테스트를 무료로 즐겨보세요.",
   keywords: ["심리테스트 모음", "무료 테스트", "성향 테스트", "테스트 모음 사이트"],
   alternates: { canonical: "/tests" },
+  openGraph: {
+    title: "무료 심리 테스트 모음 - 제미테스트",
+    description: "가입 없이 바로 할 수 있는 5가지 성향 테스트.",
+    url: "https://zemitest.com/tests",
+    images: [{ url: "/og/tests.png", width: 1200, height: 630 }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/tests.png"] },
 };
 
 const CATEGORIES = [

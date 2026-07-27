@@ -12,11 +12,13 @@ export const metadata = {
     "썸 테스트",
     "연애 궁합 테스트",
   ],
+  twitter: { card: "summary_large_image", images: ["/og/love.png"] },
   alternates: { canonical: "/tests/love" },
   openGraph: {
     title: "연애 세계관 테스트 - 나의 연애 유형은?",
     description: "20문항으로 알아보는 나의 연애 유형과 궁합. 지금 무료로 시작해보세요!",
     url: "https://zemitest.com/tests/love",
+    images: [{ url: "/og/love.png", width: 1200, height: 630 }],
   },
 };
 

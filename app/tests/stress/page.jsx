@@ -12,11 +12,13 @@ export const metadata = {
     "힐링 테스트",
     "심리테스트 스트레스",
   ],
+  twitter: { card: "summary_large_image", images: ["/og/stress.png"] },
   alternates: { canonical: "/tests/stress" },
   openGraph: {
     title: "스트레스 유형 테스트 - 나의 힐링 처방은?",
     description: "스트레스의 크기가 아니라 반응 방식을 봅니다. 8가지 유형과 맞춤 힐링 처방까지.",
     url: "https://zemitest.com/tests/stress",
+    images: [{ url: "/og/stress.png", width: 1200, height: 630 }],
   },
 };
 

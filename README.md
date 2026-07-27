@@ -39,3 +39,16 @@ npm run dev
 `app/layout.jsx` 의 verification 항목에 코드를 넣으면 됨:
 - google: 구글 서치콘솔 HTML 태그 방식의 content 값
 - naver-site-verification: 네이버 서치어드바이저 값
+
+## 썸네일 / 아이콘 다시 만들기
+
+`tools-make-og.py` 가 OG 썸네일 생성 스크립트입니다.
+테스트를 추가하면 이 파일의 ITEMS 목록에 한 줄 추가하고 실행하면 됩니다.
+
+```bash
+pip install Pillow
+python3 tools-make-og.py
+```
+
+Pretendard 폰트 경로는 스크립트 상단 FONT_DIR 에서 바꿀 수 있습니다.
+결과물은 public/og/ 에 저장됩니다.

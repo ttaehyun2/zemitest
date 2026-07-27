@@ -12,11 +12,13 @@ export const metadata = {
     "전생 직업 테스트",
     "재미있는 심리테스트",
   ],
+  twitter: { card: "summary_large_image", images: ["/og/pastlife.png"] },
   alternates: { canonical: "/tests/pastlife" },
   openGraph: {
     title: "전생 테스트 - 전생에 나는 무엇이었을까?",
     description: "28문항으로 찾아가는 나의 전생. 12가지 인물 중 당신은 누구였을까요?",
     url: "https://zemitest.com/tests/pastlife",
+    images: [{ url: "/og/pastlife.png", width: 1200, height: 630 }],
   },
 };
 
