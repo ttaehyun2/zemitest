@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
+import ShareButtons from "./ShareButtons";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/pastLifeTest";
 
@@ -11,7 +12,6 @@ export default function PastLifeTest() {
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
   const [scores, setScores] = useState({});
-  const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -42,28 +42,7 @@ export default function PastLifeTest() {
     setScores({});
     setHistory([]);
     setStep(0);
-    setCopied(false);
     setScreen("intro");
-  }
-
-  async function share() {
-    const t = result.top;
-    const text = `나의 전생은 「${t.emoji} ${t.name}」 (일치도 ${t.pct}%)\n"${t.tagline}"\n\n너의 전생도 알아봐 🔮\nzemitest.com`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "전생 테스트", text });
-        return;
-      }
-    } catch (e) {
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      /* 무시 */
-    }
   }
 
   return (
@@ -140,15 +119,22 @@ export default function PastLifeTest() {
             <p className="lu-watermark">zemitest.com</p>
           </div>
 
+          <Link href={`/tests/pastlife/types#${result.top.key}`} className="lu-readmore lu-readmore-main">
+            <span>내 전생 자세히 보기</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
+
           <Link href="/articles/why-past-life" className="lu-readmore">
             <span>사람들은 왜 전생 이야기에 끌릴까</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
           <div className="lu-actions">
-            <button className="lu-btn lu-share" onClick={share}>
-              {copied ? "복사 완료! 붙여넣기 하세요" : "결과 공유하기"}
-            </button>
+            <ShareButtons
+              text={`나의 전생은 「${t.emoji} ${t.name}」 (일치도 ${t.pct}%)\n"${t.tagline}"\n\n너의 전생도 알아봐 🔮`}
+              url="https://zemitest.com/tests/pastlife"
+              title="전생 테스트"
+            />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

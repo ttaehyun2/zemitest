@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
+import ShareButtons from "./ShareButtons";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, scoreToRanked } from "../lib/stressTest";
 
@@ -11,7 +12,6 @@ export default function StressTest() {
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
   const [scores, setScores] = useState({});
-  const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -42,28 +42,7 @@ export default function StressTest() {
     setScores({});
     setHistory([]);
     setStep(0);
-    setCopied(false);
     setScreen("intro");
-  }
-
-  async function share() {
-    const t = result.top;
-    const text = `나의 스트레스 유형은 「${t.emoji} ${t.name}」 ${t.pct}%\n"${t.tagline}"\n\n너는 어떤 유형인지 알아봐 🌿\nzemitest.com`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "스트레스 유형 테스트", text });
-        return;
-      }
-    } catch (e) {
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      /* 무시 */
-    }
   }
 
   return (
@@ -145,15 +124,22 @@ export default function StressTest() {
             사람이나 전문가에게 이야기해보시길 권합니다.
           </p>
 
+          <Link href={`/tests/stress/types#${result.top.key}`} className="lu-readmore lu-readmore-main">
+            <span>내 유형과 처방 자세히 보기</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
+
           <Link href="/articles/stop-rumination" className="lu-readmore">
             <span>생각이 멈추지 않을 때: 반추를 끊는 법</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
           <div className="lu-actions">
-            <button className="lu-btn lu-share" onClick={share}>
-              {copied ? "복사 완료! 붙여넣기 하세요" : "결과 공유하기"}
-            </button>
+            <ShareButtons
+              text={`나의 스트레스 유형은 「${t.emoji} ${t.name}」 ${t.pct}%\n"${t.tagline}"\n\n너는 어떤 유형인지 알아봐 🌿`}
+              url="https://zemitest.com/tests/stress"
+              title="스트레스 유형 테스트"
+            />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

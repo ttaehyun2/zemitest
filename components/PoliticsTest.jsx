@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
+import ShareButtons from "./ShareButtons";
 import { Intro, QuestionCard } from "./QuizShell";
 import { QUESTIONS, SCALE, MAX, classify } from "../lib/politicsTest";
 
@@ -59,7 +60,6 @@ export default function PoliticsTest() {
   const [screen, setScreen] = useState("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -99,27 +99,7 @@ export default function PoliticsTest() {
   function restart() {
     setAnswers([]);
     setStep(0);
-    setCopied(false);
     setScreen("intro");
-  }
-
-  async function share() {
-    const text = `나의 정치 성향은 「${result.quad.emoji} ${result.quad.name}」\n경제: ${result.econLabel} ${result.econVal}%\n사회: ${result.socLabel} ${result.socVal}%\n\n너의 좌표도 찍어봐 🗳️\nzemitest.com`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "정치 성향 좌표 테스트", text });
-        return;
-      }
-    } catch (e) {
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      /* 무시 */
-    }
   }
 
   return (
@@ -188,15 +168,22 @@ export default function PoliticsTest() {
             구성되어 있습니다.
           </p>
 
+          <Link href={`/tests/politics/types#${result.quad.key}`} className="lu-readmore lu-readmore-main">
+            <span>내 성향 자세히 보기</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
+
           <Link href="/articles/left-right-origin" className="lu-readmore">
             <span>좌파와 우파, 그 말은 어디서 왔을까</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
           <div className="lu-actions">
-            <button className="lu-btn lu-share" onClick={share}>
-              {copied ? "복사 완료! 붙여넣기 하세요" : "결과 공유하기"}
-            </button>
+            <ShareButtons
+              text={`나의 정치 성향은 「${result.quad.emoji} ${result.quad.name}」\n경제: ${result.econLabel} ${result.econVal}%\n사회: ${result.socLabel} ${result.socVal}%\n\n너의 좌표도 찍어봐 🗳️`}
+              url="https://zemitest.com/tests/politics"
+              title="정치 성향 좌표 테스트"
+            />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

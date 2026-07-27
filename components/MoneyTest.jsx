@@ -3,14 +3,42 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
+import ShareButtons from "./ShareButtons";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
+
+// 점수를 원형 게이지로 표시. 숫자는 정중앙에 배치됩니다.
+function ScoreRing({ value }) {
+  const size = 168;
+  const stroke = 12;
+  const r = (size - stroke) / 2;
+  const circ = 2 * Math.PI * r;
+  const filled = (value / 100) * circ;
+
+  return (
+    <div className="score-wrap">
+      <svg viewBox={`0 0 ${size} ${size}`} className="score-svg" role="img"
+           aria-label={`경제력 점수 ${value}점`}>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none"
+                stroke="rgba(0,0,0,0.18)" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none"
+                stroke="rgba(255,255,255,0.95)" strokeWidth={stroke}
+                strokeLinecap="round"
+                strokeDasharray={`${filled} ${circ}`}
+                transform={`rotate(-90 ${size / 2} ${size / 2})`} />
+      </svg>
+      <div className="score-center">
+        <span className="score-num">{value}</span>
+        <span className="score-unit">점</span>
+      </div>
+    </div>
+  );
+}
 
 export default function MoneyTest() {
   const [screen, setScreen] = useState("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
-  const [copied, setCopied] = useState(false);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -52,27 +80,7 @@ export default function MoneyTest() {
   function restart() {
     setAnswers([]);
     setStep(0);
-    setCopied(false);
     setScreen("intro");
-  }
-
-  async function share() {
-    const text = `나의 경제력 점수는 ${result.totalPct}점 「${result.grade.emoji} ${result.grade.name}」\n제일 강한 영역: ${result.strong.label} ${result.strong.pct}%\n\n너의 경제력도 측정해봐 💰\nzemitest.com`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "나의 경제력 테스트", text });
-        return;
-      }
-    } catch (e) {
-      return;
-    }
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      /* 무시 */
-    }
   }
 
   return (
@@ -111,10 +119,7 @@ export default function MoneyTest() {
           >
             <p className="lu-result-eyebrow">나의 경제력 점수</p>
 
-            <div className="score-ring">
-              <span className="score-num">{result.totalPct}</span>
-              <span className="score-unit">점</span>
-            </div>
+            <ScoreRing value={result.totalPct} />
             <p className="grade-badge">
               {result.grade.emoji} {result.grade.grade}등급
             </p>
@@ -157,15 +162,22 @@ export default function MoneyTest() {
             재무 상담을 대신하지 않습니다.
           </p>
 
+          <Link href={`/tests/money/types#${result.grade.grade}`} className="lu-readmore lu-readmore-main">
+            <span>등급 설명과 영역별 안내 보기</span>
+            <span className="lu-readmore-arrow">→</span>
+          </Link>
+
           <Link href="/articles/compound-interest" className="lu-readmore">
             <span>복리는 왜 대부분 체감되지 않을까</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
           <div className="lu-actions">
-            <button className="lu-btn lu-share" onClick={share}>
-              {copied ? "복사 완료! 붙여넣기 하세요" : "결과 공유하기"}
-            </button>
+            <ShareButtons
+              text={`나의 경제력 점수는 ${result.totalPct}점 「${result.grade.emoji} ${result.grade.name}」\n제일 강한 영역: ${result.strong.label} ${result.strong.pct}%\n\n너의 경제력도 측정해봐 💰`}
+              url="https://zemitest.com/tests/money"
+              title="나의 경제력 테스트"
+            />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>
