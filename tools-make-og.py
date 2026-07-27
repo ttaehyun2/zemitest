@@ -169,6 +169,12 @@ ITEMS = [
     ("stress.png", "STRESS TYPE", "나는 스트레스를 어떻게 받아낼까?",
      "24문항 · 결과 8종 · 나만의 힐링 처방", "🌿", "#84fab0"),
 
+    ("career.png", "CAREER VALUES", "나는 일에서 무엇을 원할까?",
+     "24문항 · 결과 8종 · 직업 가치관 진단", "🧭", "#84fab0"),
+
+    ("spending.png", "SPENDING TYPE", "나는 돈을 어떻게 쓸까?",
+     "22문항 · 결과 8종 · 맞춤 관리법까지", "🛍️", "#ffb0d8"),
+
     ("politics.png", "POLITICAL COMPASS", "나의 정치 성향 좌표는?",
      "30문항 · 2축 좌표 · 축별 퍼센트", "🗳️", "#8fd3f4"),
 
