@@ -48,7 +48,7 @@ export const metadata = {
   },
   verification: {
     // 구글 서치콘솔 / 네이버 서치어드바이저에서 받은 코드를 여기 넣으면 돼
-    google: "",
+    google: "OZHWRi-8ODrizBiMSvirCi-TGHeXRvrDFYzIYQAXFO8",
     other: {
       "naver-site-verification": "ba4efdcb325d36b84837f35f97dd1091867ac464",
     },
