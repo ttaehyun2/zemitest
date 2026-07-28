@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import Comments from "./Comments";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
@@ -64,8 +65,8 @@ export default function PastLifeTest() {
           emoji="🔮"
           eyebrow="PAST LIFE TEST"
           title={<>전생에 나는<br />무엇이었을까?</>}
-          sub={<>28개의 질문으로 찾아가는 나의 전생.<br />12가지 인물 중 당신은 누구였을까요?</>}
-          meta="28문항 · 결과 12종"
+          sub={<>20개의 질문으로 찾아가는 나의 전생.<br />12가지 인물 중 당신은 누구였을까요?</>}
+          meta="20문항 · 결과 12종"
           onStart={() => setScreen("quiz")}
         />
       )}
@@ -159,6 +160,8 @@ export default function PastLifeTest() {
             </button>
           </div>
           <p className="lu-mini lu-center">친구의 전생과 인연이 맞는지 확인해보세요 🔮</p>
+
+          <Comments pageId="test-pastlife" title="다들 뭐 나왔어요?" />
         </div>
       )}
     </div>

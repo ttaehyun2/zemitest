@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import Comments from "./Comments";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
@@ -64,8 +65,8 @@ export default function AnimalTest() {
           emoji="🐾"
           eyebrow="ANIMAL TEST"
           title={<>나와 닮은 동물은<br />무엇일까?</>}
-          sub={<>27개의 질문으로 찾는 나의 동물.<br />16가지 동물 중 나는 누구를 닮았을까요?</>}
-          meta="27문항 · 결과 16종"
+          sub={<>22개의 질문으로 찾는 나의 동물.<br />16가지 동물 중 나는 누구를 닮았을까요?</>}
+          meta="22문항 · 결과 16종"
           onStart={() => setScreen("quiz")}
         />
       )}
@@ -173,6 +174,8 @@ export default function AnimalTest() {
             </button>
           </div>
           <p className="lu-mini lu-center">친구는 어떤 동물인지도 확인해보세요 🐾</p>
+
+          <Comments pageId="test-animal" title="다들 뭐 나왔어요?" />
         </div>
       )}
     </div>

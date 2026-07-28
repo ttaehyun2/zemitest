@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import Comments from "./Comments";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
@@ -145,6 +146,8 @@ export default function CareerTest() {
             <button className="lu-btn lu-ghost" onClick={restart}>다시 하기</button>
           </div>
           <p className="lu-mini lu-center">친구들과 가치관을 비교해보세요 🧭</p>
+
+          <Comments pageId="test-career" title="다들 뭐 나왔어요?" />
         </div>
       )}
     </div>

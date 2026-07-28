@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import Comments from "./Comments";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
@@ -164,6 +165,8 @@ export default function StressTest() {
             </button>
           </div>
           <p className="lu-mini lu-center">친구는 어떤 유형인지도 확인해보세요 🌿</p>
+
+          <Comments pageId="test-stress" title="다들 뭐 나왔어요?" />
         </div>
       )}
     </div>

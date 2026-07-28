@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import Comments from "./Comments";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen } from "./QuizShell";
@@ -118,7 +119,7 @@ export default function PoliticsTest() {
           eyebrow="POLITICAL COMPASS"
           title={<>나의 정치 성향은<br />어디쯤일까?</>}
           sub={<>진보↔보수, 자유↔사회.<br />두 개의 축으로 나의 좌표를 찍어봅니다.</>}
-          meta="30문항 · 2축 좌표 · 결과 5종"
+          meta="20문항 · 2축 좌표 · 결과 5종"
           onStart={() => setScreen("quiz")}
         />
       )}
@@ -204,6 +205,8 @@ export default function PoliticsTest() {
             </button>
           </div>
           <p className="lu-mini lu-center">친구들과 좌표 비교해보세요 🗳️</p>
+
+          <Comments pageId="test-politics" title="다들 뭐 나왔어요?" />
         </div>
       )}
     </div>
