@@ -17,6 +17,8 @@ export const metadata = {
 };
 
 const CATEGORIES = [
+  { key: "sim", label: "인생 시뮬레이션", sub: "선택이 쌓여 결말이 갈리는 게임" },
+  { key: "score", label: "점수·랭킹 테스트", sub: "점수와 등수가 나오는 테스트" },
   { key: "psych", label: "심리 테스트", sub: "성격과 마음을 들여다보는 테스트" },
   { key: "value", label: "성향·가치관 테스트", sub: "생각과 판단의 기준을 확인하는 테스트" },
 ];

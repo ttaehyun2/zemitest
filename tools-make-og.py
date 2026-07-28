@@ -157,6 +157,33 @@ ITEMS = [
     ("tests.png", "ALL TESTS", "무료 심리 테스트 모음",
      "가입 없이 바로 할 수 있는 5가지 테스트", "🗂️", "#ffd6a5"),
 
+    ("lifesim.png", "LIFE SIMULATION", "당신의 인생은 어떻게 끝날까?",
+     "20번의 선택 · 18가지 결말 · 매번 달라짐", "🎲", "#ffd6a5"),
+
+    ("moral.png", "MORAL COMPASS", "너라면 누구를 살릴래?",
+     "기차 · 침몰하는 배 · 불타는 건물 · 20번의 선택", "⚖️", "#ffb0d8"),
+
+    ("legacy.png", "YOUR LEGACY", "죽기 직전 어떤 사람으로 기억될까?",
+     "당신의 묘비에 새겨질 한 문장은?", "🕊️", "#c9a5ff"),
+
+    ("human.png", "HUMAN STATS", "너는 상위 몇 프로의 인간인가?",
+     "24문항 · 6개 영역 종합 능력치", "👑", "#ffd6a5"),
+
+    ("social.png", "SOCIAL SURVIVAL", "나는 사회생활을 얼마나 버틸까?",
+     "20문항 · 100점 만점 · 상위 % 표시", "🎖️", "#ffb0d8"),
+
+    ("liar.png", "LIE DETECTOR", "이 사람의 거짓말을 알아챌까?",
+     "20문항 · 사람 평균 정확도는 54%", "🔍", "#8fd3f4"),
+
+    ("nunchi.png", "NUNCHI TEST", "나는 눈치가 얼마나 빠를까?",
+     "20문항 · 100점 만점 · 상위 % 표시", "👀", "#c9a5ff"),
+
+    ("difficulty.png", "LIFE DIFFICULTY", "너의 인생 난이도는?",
+     "EASY부터 NIGHTMARE까지 5단계", "🎮", "#ffd6a5"),
+
+    ("island.png", "ISLAND SURVIVAL", "무인도에서 며칠 버틸까?",
+     "20문항 · 생존 일수 계산", "🏝️", "#84fab0"),
+
     ("love.png", "PERSONALITY TEST", "나의 연애 세계관은 어떤 우주일까?",
      "20문항 · 결과 6종 · 유형별 퍼센트까지", "💘", "#ff8ab5"),
 

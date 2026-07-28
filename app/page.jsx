@@ -4,6 +4,8 @@ import { TESTS } from "../lib/tests";
 import TestGrid from "../components/TestGrid";
 
 const CATEGORIES = [
+  { key: "sim", label: "인생 시뮬레이션" },
+  { key: "score", label: "점수·랭킹 테스트" },
   { key: "psych", label: "심리 테스트" },
   { key: "value", label: "성향·가치관 테스트" },
 ];

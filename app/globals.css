@@ -1740,3 +1740,384 @@ a {
     max-width: 1160px;
   }
 }
+
+/* ── 텍스트 선택 ──
+   기본 파란색 하이라이트가 보라 배경과 어울리지 않아 테마 색으로 맞춥니다. */
+::selection {
+  background: #ffd6a5;
+  color: #231343;
+}
+::-moz-selection {
+  background: #ffd6a5;
+  color: #231343;
+}
+
+/* 버튼·링크·타일은 누를 때 글자가 선택되지 않도록 */
+button,
+.nav-logo,
+.nav-links a,
+.tile,
+.lu-option,
+.lu-btn,
+.share-item,
+.more-btn,
+.cmt-jump,
+.lu-readmore,
+.article-cta,
+.footer-links a,
+.type-head,
+.lu-back {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 본문·댓글처럼 복사할 만한 곳은 선택 가능하게 유지 */
+.article p,
+.article li,
+.article blockquote,
+.doc p,
+.doc li,
+.cmt-body,
+.type-desc,
+.type-ul li,
+.lu-result-desc,
+.info-text {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* ── 점수형 결과 ── */
+.score-wrap-lg {
+  width: 176px;
+  height: 176px;
+}
+.score-wrap-lg .score-num {
+  font-size: 62px;
+}
+.rank-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto 18px;
+  padding: 12px 22px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.rank-top {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.rank-sub {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
+  word-break: keep-all;
+  text-align: center;
+}
+.on-light .rank-badge {
+  background: rgba(255, 255, 255, 0.5);
+}
+.on-light .rank-top,
+.on-light .rank-sub {
+  color: #231343;
+}
+
+/* ── 점수형 결과의 강조 문구 (예: 생존 17일) ── */
+.headline-box {
+  margin: 6px 0 4px;
+}
+.headline-main {
+  margin: 0;
+  font-size: clamp(24px, 6.5vw, 30px);
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ── 묘비명 ── */
+.epitaph-box {
+  position: relative;
+  margin: 8px 0 20px;
+  padding: 22px 24px 20px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.epitaph-mark {
+  margin: 0;
+  font-size: 34px;
+  line-height: 0.6;
+  opacity: 0.45;
+  font-weight: 900;
+}
+.epitaph-text {
+  margin: 6px 0 0;
+  font-size: clamp(17px, 4.6vw, 20px);
+  font-weight: 800;
+  line-height: 1.65;
+  word-break: keep-all;
+}
+.on-light .epitaph-box {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(35, 19, 67, 0.2);
+}
+.on-light .epitaph-mark,
+.on-light .epitaph-text {
+  color: #231343;
+}
+
+/* ── 사상자 집계 ── */
+.toll-box {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 14px 0 20px;
+  padding: 20px 10px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.toll-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.toll-num {
+  font-size: clamp(38px, 10vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.toll-saved .toll-num {
+  color: #9dffc4;
+}
+.toll-lost .toll-num {
+  color: #ff9aa8;
+}
+.toll-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  opacity: 0.9;
+  word-break: keep-all;
+}
+.toll-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 4px 0;
+}
+.on-light .toll-box {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(35, 19, 67, 0.18);
+}
+.on-light .toll-label {
+  color: #231343;
+}
+.on-light .toll-saved .toll-num {
+  color: #1c7a45;
+}
+.on-light .toll-lost .toll-num {
+  color: #a3213a;
+}
+.on-light .toll-divider {
+  background: rgba(35, 19, 67, 0.2);
+}
+
+/* ── 묘비 ── */
+.grave {
+  margin: 10px 0 22px;
+}
+.grave-stone {
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 26px 24px 24px;
+  border-radius: 150px 150px 14px 14px;
+  background: linear-gradient(170deg, #cfc9dd, #a8a1bd 55%, #8f88a6);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+.grave-cross {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: rgba(58, 48, 82, 0.55);
+  line-height: 1;
+}
+.grave-text {
+  margin: 0;
+  font-size: clamp(15.5px, 4.2vw, 18px);
+  font-weight: 800;
+  line-height: 1.7;
+  color: #2c2440;
+  word-break: keep-all;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+.grave-line {
+  width: 46px;
+  height: 1px;
+  margin: 14px auto 10px;
+  background: rgba(58, 48, 82, 0.35);
+}
+.grave-name {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(58, 48, 82, 0.7);
+  word-break: keep-all;
+}
+.grave-ground {
+  max-width: 340px;
+  height: 14px;
+  margin: -6px auto 0;
+  border-radius: 0 0 50% 50%;
+  background: rgba(0, 0, 0, 0.22);
+  filter: blur(3px);
+}
+
+/* ══ 인생 시뮬레이션 ══ */
+.sim-card {
+  max-width: 520px;
+}
+.sim-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sim-chapter {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffd6a5;
+  word-break: keep-all;
+}
+.sim-age {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+
+/* 진행 중 능력치 바 */
+.sim-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 12px;
+  margin: 18px 0 22px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.sim-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sim-stat-emoji {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.sim-stat-track {
+  flex: 1;
+  height: 5px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+.sim-stat-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ffd6a5, #ffb0d8);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sim-stat-num {
+  font-size: 11px;
+  font-weight: 800;
+  width: 20px;
+  text-align: right;
+  color: var(--ink-dim);
+  flex-shrink: 0;
+}
+
+.sim-text {
+  margin: 0 0 22px;
+  font-size: clamp(16px, 4.4vw, 18.5px);
+  line-height: 1.8;
+  font-weight: 700;
+  word-break: keep-all;
+  text-wrap: balance;
+}
+
+/* 선택 직후 피드백 화면 */
+.sim-feedback {
+  text-align: center;
+  animation: lu-in 0.35s ease both;
+}
+.fb-choice {
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffd6a5;
+  word-break: keep-all;
+}
+.fb-result {
+  margin: 0 0 22px;
+  font-size: clamp(16px, 4.4vw, 18px);
+  line-height: 1.8;
+  font-weight: 700;
+  word-break: keep-all;
+}
+.fb-gains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+.fb-gain {
+  padding: 6px 13px;
+  border-radius: 99px;
+  font-size: 12.5px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.fb-gain.up {
+  background: rgba(130, 255, 180, 0.2);
+  color: #a8ffcb;
+}
+.fb-gain.down {
+  background: rgba(255, 130, 150, 0.2);
+  color: #ffb0bd;
+}
+
+/* 인생 요약 */
+.life-log {
+  margin: 0;
+  padding-left: 18px;
+  text-align: left;
+}
+.life-log li {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 7px;
+  word-break: keep-all;
+}
+.life-ch {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  font-weight: 800;
+}
+.on-light .life-ch {
+  background: rgba(35, 19, 67, 0.15);
+}

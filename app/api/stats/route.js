@@ -14,6 +14,11 @@ const ALLOWED = {
   career: ["achieve","stable","reward","free","relation","meaning","balance","expert"],
   spending: ["flex","saver","planner","value","impulse","smart","giver","brand"],
   money: ["S", "A", "B", "C", "D"],
+  moral: ["util", "duty", "bond", "guard", "situation", "just"],
+  legacy: ["tree", "fire", "candle", "path", "laugh", "make", "stand", "bridge"],
+  lifesim: ["collapse","broke","disgraced","hollow","workhorse","lonelytop","legend",
+            "reborn","quietrich","giver","mentor","creator","family","freesoul",
+            "comeback","gambler","healthy","ordinary"],
 };
 
 function getRedis() {
@@ -37,6 +42,56 @@ function summarize(test, counts) {
     dist[t] = { count: n, pct: total ? Math.round((n / total) * 1000) / 10 : 0 };
   });
   return { total, dist };
+}
+
+// ── 점수형 테스트: 점수 분포를 기록하고 백분위를 돌려줍니다 ──
+// 유형형과 달리 0~100 점수를 버킷에 누적해 "상위 몇 %"를 실제 데이터로 계산합니다.
+const SCORE_TESTS = ["nunchi", "difficulty", "island", "social", "liar", "human"];
+
+export async function PUT(req) {
+  try {
+    const { test, score } = await req.json();
+    if (!SCORE_TESTS.includes(test)) {
+      return NextResponse.json({ error: "invalid" }, { status: 400 });
+    }
+    const n = Math.max(0, Math.min(100, Math.round(Number(score))));
+    if (!Number.isFinite(n)) {
+      return NextResponse.json({ error: "invalid" }, { status: 400 });
+    }
+    const redis = getRedis();
+    if (!redis) return NextResponse.json({ enabled: false });
+
+    const key = `scores:${test}`;
+    await redis.hincrby(key, String(n), 1);
+    const counts = (await redis.hgetall(key)) || {};
+
+    let total = 0, below = 0, same = 0;
+    Object.entries(counts).forEach(([k, v]) => {
+      const c = Number(v) || 0;
+      total += c;
+      if (Number(k) < n) below += c;
+      if (Number(k) === n) same += c;
+    });
+
+    // 동점자는 절반만 앞선 것으로 계산 (표준적인 백분위 방식)
+    const percentile = total ? ((below + same / 2) / total) * 100 : 50;
+    const topPct = Math.max(1, Math.min(99, Math.round(100 - percentile)));
+
+    return NextResponse.json({
+      enabled: true,
+      total,
+      topPct,        // 상위 몇 %
+      percentile: Math.round(percentile),
+      average: total
+        ? Math.round(
+            Object.entries(counts).reduce((s, [k, v]) => s + Number(k) * (Number(v) || 0), 0) / total
+          )
+        : null,
+    });
+  } catch (e) {
+    console.error("stats PUT error:", e);
+    return NextResponse.json({ enabled: false });
+  }
 }
 
 // 결과 1건 기록 후 최신 분포 반환
