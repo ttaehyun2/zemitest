@@ -5,9 +5,11 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import Comments from "./Comments";
+import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
+import { cardToneClass } from "../lib/contrast";
 import { TYPES, QUESTIONS } from "../lib/loveTest";
 
 export default function LoveTest() {
@@ -15,6 +17,7 @@ export default function LoveTest() {
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
   const [scores, setScores] = useState({});
+  const [cmtCount, setCmtCount] = useState(null);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -102,7 +105,7 @@ export default function LoveTest() {
         <div className="lu-result-wrap">
           <div
             id="result-card-love"
-            className="lu-result-card"
+            className={`lu-result-card${cardToneClass(result.top.grad)}`}
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
             }}
@@ -153,6 +156,7 @@ export default function LoveTest() {
 
 
           <ResultStats test="love" type={result.top.key} typeName={result.top.name} />
+          <CommentJump pageId="test-love" count={cmtCount} />
 
           <div className="lu-actions">
             <ShareButtons
@@ -167,7 +171,7 @@ export default function LoveTest() {
           </div>
           <p className="lu-mini lu-center">친구에게 공유하고 궁합도 맞춰보세요 💕</p>
 
-          <Comments pageId="test-love" title="다들 뭐 나왔어요?" />
+          <Comments pageId="test-love" title="다들 뭐 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
     </div>

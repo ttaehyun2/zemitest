@@ -7,7 +7,7 @@ import { MAX_LEN, MAX_NICK } from "../lib/commentFilter";
  * 댓글 영역.
  * 저장소가 연결되지 않은 환경에서는 안내 문구만 보여주고 조용히 넘어갑니다.
  */
-export default function Comments({ pageId, title = "댓글" }) {
+export default function Comments({ pageId, title = "댓글", onCount }) {
   const [items, setItems] = useState([]);
   const [enabled, setEnabled] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -20,10 +20,14 @@ export default function Comments({ pageId, title = "댓글" }) {
     try {
       const res = await fetch(`/api/comments?page=${encodeURIComponent(pageId)}`);
       const json = await res.json();
-      setEnabled(json.enabled !== false);
+      const on = json.enabled !== false;
+      setEnabled(on);
       setItems(json.items || []);
+      // 댓글 기능이 꺼져 있으면 null 을 알려 바로가기 버튼도 함께 숨깁니다
+      if (onCount) onCount(on ? (json.items || []).length : null);
     } catch (e) {
       setEnabled(false);
+      if (onCount) onCount(null);
     } finally {
       setLoading(false);
     }
@@ -49,7 +53,11 @@ export default function Comments({ pageId, title = "댓글" }) {
         setError(json.error || "등록에 실패했어요.");
       } else {
         setText("");
-        setItems((prev) => [json.item, ...prev]);
+        setItems((prev) => {
+          const next = [json.item, ...prev];
+          if (onCount) onCount(next.length);
+          return next;
+        });
       }
     } catch (e) {
       setError("잠시 후 다시 시도해주세요.");
@@ -73,7 +81,7 @@ export default function Comments({ pageId, title = "댓글" }) {
   if (!enabled) return null;
 
   return (
-    <section className="cmt-wrap">
+    <section className="cmt-wrap" id={`comments-${pageId}`}>
       <div className="section-head">
         <h2>
           {title} {items.length > 0 && <span className="cmt-count">{items.length}</span>}

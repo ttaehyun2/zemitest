@@ -5,9 +5,11 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import Comments from "./Comments";
+import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
+import { cardToneClass } from "../lib/contrast";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
 
 // 점수를 원형 게이지로 표시. 숫자는 정중앙에 배치됩니다.
@@ -42,6 +44,7 @@ export default function MoneyTest() {
   const [screen, setScreen] = useState("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [cmtCount, setCmtCount] = useState(null);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -129,7 +132,7 @@ export default function MoneyTest() {
         <div className="lu-result-wrap">
           <div
             id="result-card-money"
-            className="lu-result-card"
+            className={`lu-result-card${cardToneClass(result.grade.grad)}`}
             style={{
               background: `linear-gradient(160deg, ${result.grade.grad[0]}, ${result.grade.grad[1]})`,
             }}
@@ -186,6 +189,7 @@ export default function MoneyTest() {
 
 
           <ResultStats test="money" type={result.grade.grade} typeName={result.grade.name} />
+          <CommentJump pageId="test-money" count={cmtCount} />
 
           <div className="lu-actions">
             <ShareButtons
@@ -200,7 +204,7 @@ export default function MoneyTest() {
           </div>
           <p className="lu-mini lu-center">친구들과 점수 비교해보세요 💸</p>
 
-          <Comments pageId="test-money" title="다들 뭐 나왔어요?" />
+          <Comments pageId="test-money" title="다들 뭐 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
     </div>

@@ -5,9 +5,11 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import Comments from "./Comments";
+import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen } from "./QuizShell";
+import { cardToneClass } from "../lib/contrast";
 import { QUESTIONS, SCALE, MAX, classify } from "../lib/politicsTest";
 
 // 2축 좌표 그래프
@@ -63,6 +65,7 @@ export default function PoliticsTest() {
   const [screen, setScreen] = useState("intro");
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [cmtCount, setCmtCount] = useState(null);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -148,7 +151,7 @@ export default function PoliticsTest() {
         <div className="lu-result-wrap">
           <div
             id="result-card-politics"
-            className="lu-result-card"
+            className={`lu-result-card${cardToneClass(result.quad.grad)}`}
             style={{
               background: `linear-gradient(160deg, ${result.quad.grad[0]}, ${result.quad.grad[1]})`,
             }}
@@ -192,6 +195,7 @@ export default function PoliticsTest() {
 
 
           <ResultStats test="politics" type={result.quad.key} typeName={result.quad.name} />
+          <CommentJump pageId="test-politics" count={cmtCount} />
 
           <div className="lu-actions">
             <ShareButtons
@@ -206,7 +210,7 @@ export default function PoliticsTest() {
           </div>
           <p className="lu-mini lu-center">친구들과 좌표 비교해보세요 🗳️</p>
 
-          <Comments pageId="test-politics" title="다들 뭐 나왔어요?" />
+          <Comments pageId="test-politics" title="다들 뭐 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
     </div>

@@ -5,9 +5,11 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import Comments from "./Comments";
+import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
+import { cardToneClass } from "../lib/contrast";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/pastLifeTest";
 
 export default function PastLifeTest() {
@@ -15,6 +17,7 @@ export default function PastLifeTest() {
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
   const [scores, setScores] = useState({});
+  const [cmtCount, setCmtCount] = useState(null);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -95,7 +98,7 @@ export default function PastLifeTest() {
         <div className="lu-result-wrap">
           <div
             id="result-card-pastlife"
-            className="lu-result-card"
+            className={`lu-result-card${cardToneClass(result.top.grad)}`}
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
             }}
@@ -147,6 +150,7 @@ export default function PastLifeTest() {
 
 
           <ResultStats test="pastlife" type={result.top.key} typeName={result.top.name} />
+          <CommentJump pageId="test-pastlife" count={cmtCount} />
 
           <div className="lu-actions">
             <ShareButtons
@@ -161,7 +165,7 @@ export default function PastLifeTest() {
           </div>
           <p className="lu-mini lu-center">친구의 전생과 인연이 맞는지 확인해보세요 🔮</p>
 
-          <Comments pageId="test-pastlife" title="다들 뭐 나왔어요?" />
+          <Comments pageId="test-pastlife" title="다들 뭐 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
     </div>

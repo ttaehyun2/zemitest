@@ -5,9 +5,11 @@ import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import Comments from "./Comments";
+import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
+import { cardToneClass } from "../lib/contrast";
 import { QUESTIONS, scoreToRanked } from "../lib/careerTest";
 
 export default function CareerTest() {
@@ -15,6 +17,7 @@ export default function CareerTest() {
   const [step, setStep] = useState(0);
   const [history, setHistory] = useState([]);
   const [scores, setScores] = useState({});
+  const [cmtCount, setCmtCount] = useState(null);
 
   const result = useMemo(() => {
     if (screen !== "result") return null;
@@ -84,7 +87,7 @@ export default function CareerTest() {
 
       {screen === "result" && result && (
         <div className="lu-result-wrap">
-          <div id="result-card-career" className="lu-result-card"
+          <div id="result-card-career" className={`lu-result-card${cardToneClass(result.top.grad)}`}
                style={{ background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})` }}>
             <p className="lu-result-eyebrow">나의 직업 가치관</p>
             <div className="lu-orb" style={{ boxShadow: `0 0 60px 10px ${result.top.glow}` }}>
@@ -135,6 +138,7 @@ export default function CareerTest() {
           </Link>
 
           <ResultStats test="career" type={result.top.key} typeName={result.top.name} />
+          <CommentJump pageId="test-career" count={cmtCount} />
 
           <div className="lu-actions">
             <ShareButtons
@@ -147,7 +151,7 @@ export default function CareerTest() {
           </div>
           <p className="lu-mini lu-center">친구들과 가치관을 비교해보세요 🧭</p>
 
-          <Comments pageId="test-career" title="다들 뭐 나왔어요?" />
+          <Comments pageId="test-career" title="다들 뭐 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
     </div>

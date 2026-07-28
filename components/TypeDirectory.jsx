@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { cardToneClass } from "../lib/contrast";
 
 /**
  * 유형 사전. 결과 화면에서 #유형키 앵커로 들어오면 해당 카드가 강조됩니다.
@@ -28,7 +29,7 @@ export default function TypeDirectory({ items, backHref, backLabel }) {
             className={`type-card${active === t.key ? " type-active" : ""}`}
           >
             <div
-              className="type-head"
+              className={`type-head${cardToneClass(t.grad)}`}
               style={{ background: `linear-gradient(120deg, ${t.grad[0]}, ${t.grad[1]})` }}
             >
               <span className="type-emoji">{t.emoji}</span>

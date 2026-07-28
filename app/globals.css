@@ -1319,8 +1319,9 @@ a {
 
 /* ── 댓글 ── */
 .cmt-wrap {
-  margin-top: 44px;
-  padding-top: 8px;
+  margin-top: 26px;
+  padding-top: 20px;
+  scroll-margin-top: 16px;
   border-top: 1px solid var(--line);
 }
 .cmt-count {
@@ -1501,4 +1502,241 @@ a {
 .admin-ban:hover {
   background: rgba(255, 80, 80, 0.35);
   color: #fff;
+}
+
+/* ── 댓글 바로가기 ── */
+.cmt-jump {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.cmt-jump:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+.cmt-jump-icon {
+  font-size: 17px;
+}
+.cmt-jump-text {
+  flex: 1;
+  text-align: left;
+  word-break: keep-all;
+}
+.cmt-jump-badge {
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: #ffd6a5;
+  color: #231343;
+  font-size: 12.5px;
+  font-weight: 900;
+}
+.cmt-jump-arrow {
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+/* ── 밝은 배경 카드: 글자색 자동 전환 ──
+   흰 글씨 대비가 부족한 밝은 그라데이션에서는 어두운 글씨로 바꿉니다. */
+.on-light {
+  color: #231343;
+}
+.on-light .lu-result-eyebrow,
+.on-light .lu-result-name,
+.on-light .lu-result-bigpct,
+.on-light .lu-result-tagline,
+.on-light .lu-result-desc,
+.on-light .lu-bars-title,
+.on-light .bar-label,
+.on-light .bar-pct,
+.on-light .bar-sub,
+.on-light .lu-match-label,
+.on-light .lu-match-type,
+.on-light .lu-tip-label,
+.on-light .lu-tip-text,
+.on-light .info-title,
+.on-light .info-text,
+.on-light .remedy-list li,
+.on-light .rest-tag,
+.on-light .era-tag,
+.on-light .grade-badge,
+.on-light .axis-label,
+.on-light .axis-val,
+.on-light .axis-name,
+.on-light .score-num,
+.on-light .score-unit,
+.on-light .type-name,
+.on-light .type-tagline,
+.on-light .type-badge {
+  color: #231343;
+  text-shadow: none;
+}
+.on-light .lu-result-desc,
+.on-light .lu-bars,
+.on-light .info-box,
+.on-light .remedy-box,
+.on-light .lu-match,
+.on-light .axis-box {
+  background: rgba(255, 255, 255, 0.45);
+}
+.on-light .lu-tip,
+.on-light .era-tag,
+.on-light .grade-badge,
+.on-light .type-badge {
+  background: rgba(255, 255, 255, 0.55);
+}
+.on-light .bar-track {
+  background: rgba(35, 19, 67, 0.16);
+}
+.on-light .bar-fill {
+  background: rgba(35, 19, 67, 0.72) !important;
+}
+.on-light .lu-orb {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+.on-light .lu-watermark {
+  color: rgba(35, 19, 67, 0.62);
+}
+.on-light .rest-tag {
+  border-top-color: rgba(35, 19, 67, 0.22);
+}
+/* 정치 좌표 그래프 */
+.on-light .compass-label {
+  fill: #231343;
+}
+.on-light .compass rect[stroke],
+.on-light .compass line {
+  stroke: rgba(35, 19, 67, 0.35);
+}
+/* 경제력 점수 링 */
+.on-light .score-svg circle:last-child {
+  stroke: rgba(35, 19, 67, 0.8);
+}
+.on-light .score-svg {
+  filter: none;
+}
+
+/* ══════════════════════════════════════════
+   PC 레이아웃 최적화
+   모바일 기준(440px 한 줄)으로 만들어져 있어 넓은 화면에서는
+   좌우 여백만 넓고 세로로 길어집니다. 가로 공간을 활용합니다.
+   ══════════════════════════════════════════ */
+
+/* 태블릿 이상: 문항 카드와 선택지를 넓게 */
+@media (min-width: 720px) {
+  .lu-card {
+    max-width: 560px;
+    padding: 42px 38px;
+  }
+  .lu-question {
+    font-size: 23px;
+    margin: 34px 0 28px;
+  }
+  /* 선택지를 2열로 (텍스트가 짧은 5점 척도 등에서 특히 효과적) */
+  .lu-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .lu-option:hover {
+    transform: translateY(-2px);
+  }
+  .lu-intro .lu-title {
+    font-size: 33px;
+  }
+}
+
+/* 데스크톱: 결과 화면을 2단으로 */
+@media (min-width: 1000px) {
+  .lu-root {
+    align-items: flex-start;
+    padding-top: 8px;
+  }
+  .lu-result-wrap {
+    width: 100%;
+    max-width: 940px;
+    display: grid;
+    grid-template-columns: 430px minmax(0, 1fr);
+    column-gap: 30px;
+    row-gap: 12px;
+    align-items: start;
+  }
+  /* 왼쪽: 결과 카드 (여러 행에 걸침) */
+  .lu-result-wrap > .lu-result-card {
+    grid-column: 1;
+    grid-row: 1 / span 8;
+    margin: 0;
+  }
+  /* 오른쪽: 링크·통계·버튼들 */
+  .lu-result-wrap > .lu-readmore,
+  .lu-result-wrap > .stats-box,
+  .lu-result-wrap > .cmt-jump,
+  .lu-result-wrap > .lu-actions,
+  .lu-result-wrap > .lu-mini,
+  .lu-result-wrap > .disclaimer {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  .lu-result-wrap > .lu-readmore {
+    margin-top: 2px;
+  }
+  /* 오른쪽 열 안에서의 표시 순서를 명시 (안내 문구는 맨 아래로) */
+  .lu-result-wrap > .lu-result-card { order: 0; }
+  .lu-result-wrap > .lu-readmore { order: 1; }
+  .lu-result-wrap > .stats-box { order: 2; }
+  .lu-result-wrap > .cmt-jump { order: 3; }
+  .lu-result-wrap > .lu-actions { order: 4; }
+  .lu-result-wrap > .lu-mini { order: 5; }
+  .lu-result-wrap > .disclaimer { order: 6; }
+
+  /* 댓글은 아래 전체 폭 */
+  .lu-result-wrap > .cmt-wrap {
+    order: 7;
+    grid-column: 1 / -1;
+    margin-top: 34px;
+  }
+  /* 공유 버튼 3개를 한 줄에 여유 있게 */
+  .share-grid {
+    gap: 10px;
+  }
+  /* 결과 카드 안쪽도 조금 더 여유 있게 */
+  .lu-result-card {
+    padding: 36px 30px 28px;
+  }
+}
+
+/* 넓은 화면에서 본문·목록도 답답하지 않게 */
+@media (min-width: 1100px) {
+  .main {
+    max-width: 1040px;
+  }
+  .article,
+  .doc {
+    max-width: 760px;
+  }
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .page-title {
+    font-size: 40px;
+  }
+}
+
+/* 아주 넓은 화면 */
+@media (min-width: 1400px) {
+  .main {
+    max-width: 1160px;
+  }
 }
