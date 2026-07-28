@@ -62,7 +62,7 @@ a {
   max-width: 880px;
   width: 100%;
   margin: 0 auto;
-  padding: 18px 20px;
+  padding: 20px;
 }
 .nav-logo {
   font-weight: 900;
@@ -83,11 +83,17 @@ a {
 .footer {
   margin-top: auto;
   border-top: 1px solid var(--line);
-  padding: 26px 20px 34px;
+  padding: 26px 0 34px;
   text-align: center;
   font-size: 13px;
   color: var(--ink-faint);
   line-height: 1.8;
+}
+.footer-inner {
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .footer-links {
   display: flex;
@@ -1719,7 +1725,9 @@ a {
 
 /* 넓은 화면에서 본문·목록도 답답하지 않게 */
 @media (min-width: 1100px) {
-  .main {
+  .main,
+  .nav,
+  .footer-inner {
     max-width: 1040px;
   }
   .article,
@@ -1736,7 +1744,9 @@ a {
 
 /* 아주 넓은 화면 */
 @media (min-width: 1400px) {
-  .main {
+  .main,
+  .nav,
+  .footer-inner {
     max-width: 1160px;
   }
 }
@@ -2120,4 +2130,33 @@ button,
 }
 .on-light .life-ch {
   background: rgba(35, 19, 67, 0.15);
+}
+
+/* ── 공유 안내 (이미지 기반 SNS) ── */
+.share-note {
+  margin-top: 4px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+}
+.share-note-title {
+  margin: 0 0 7px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffd6a5;
+}
+.share-note-text {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink-dim);
+  word-break: keep-all;
+}
+.share-note-text:last-child {
+  margin-bottom: 0;
+}
+.share-note-text strong {
+  color: var(--ink);
+  font-weight: 800;
 }

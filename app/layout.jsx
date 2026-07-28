@@ -1,5 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
+import Script from "next/script";
 
 export const metadata = {
   metadataBase: new URL("https://zemitest.com"),
@@ -59,6 +60,10 @@ export const metadata = {
   },
 };
 
+// 애드센스 게시자 ID. Vercel 환경변수 NEXT_PUBLIC_ADSENSE_ID 에 넣으면 적용됩니다.
+// 값이 없으면 광고 스크립트를 아예 넣지 않으므로 개발 중에도 문제가 없습니다.
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID || "";
+
 // 검색엔진이 사이트 성격을 정확히 인식하도록 돕는 구조화 데이터
 const JSON_LD = {
   "@context": "https://schema.org",
@@ -80,6 +85,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <head>
+        {/* 구글 애드센스. 심사와 광고 노출 모두 이 스크립트가 필요합니다. */}
+        {ADSENSE_ID && (
+          <meta name="google-adsense-account" content={ADSENSE_ID} />
+        )}
+
         {/* Pretendard: 한글 가독성이 좋은 웹폰트. 동적 서브셋이라 용량 부담이 적음 */}
         <link
           rel="preconnect"
@@ -94,6 +104,14 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        />
+
+        {/* 구글 애드센스 */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8750108826783588"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
       </head>
       <body>
@@ -114,14 +132,25 @@ export default function RootLayout({ children }) {
           <main className="main">{children}</main>
 
           <footer className="footer">
+            <div className="footer-inner">
             <div className="footer-links">
               <Link href="/about">사이트 소개</Link>
               <Link href="/privacy">개인정보처리방침</Link>
               <Link href="/contact">문의하기</Link>
             </div>
             <div>© 2026 제미테스트 (zemitest.com). All rights reserved.</div>
+            </div>
           </footer>
         </div>
+
+        {ADSENSE_ID && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

@@ -95,10 +95,17 @@ export default function ShareButtons({ text, url = "https://zemitest.com", title
       )}
 
       {showAll && (
-        <p className="share-hint">
-          카카오톡·인스타그램은 링크를 복사해서 붙여넣거나, 결과 화면을 캡처해서
-          공유해주세요.
-        </p>
+        <div className="share-note">
+          <p className="share-note-title">📱 인스타 · 틱톡에 올리려면</p>
+          <p className="share-note-text">
+            두 서비스는 웹에서 바로 올리는 기능을 제공하지 않아요. 아래
+            <strong> 결과 이미지로 저장</strong> 버튼으로 이미지를 받은 뒤
+            올려주세요. 휴대폰으로 접속하면 공유 버튼에서 바로 앱 선택이 뜹니다.
+          </p>
+          <p className="share-note-text">
+            카카오톡은 링크를 복사해 붙여넣으면 미리보기가 뜹니다.
+          </p>
+        </div>
       )}
     </div>
   );

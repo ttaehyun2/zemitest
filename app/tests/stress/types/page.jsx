@@ -41,6 +41,15 @@ export default function Page() {
         <h2>함께 읽어보기</h2>
       </div>
       <div className="grid">
+        <Link href="/articles/no-energy" className="tile">
+          <h3 className="tile-title">무기력할 때, 다시 움직이는 법</h3>
+        </Link>
+      </div>
+
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
         <Link href="/articles/stop-rumination" className="tile">
           <h3 className="tile-title">생각이 멈추지 않을 때: 반추를 끊는 법</h3>
         </Link>

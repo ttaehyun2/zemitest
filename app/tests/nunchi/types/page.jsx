@@ -28,6 +28,15 @@ export default function Page() {
       <h1 className="page-title">👀 눈치 등급 5단계</h1>
       <p className="page-lead">상황 판단 점수에 따라 나뉘는 다섯 단계입니다. 눈치가 좋다는 건 남의 비위를 맞춘다는 뜻이 아니라, 상황을 정확히 읽는다는 뜻입니다.</p>
       <TypeDirectory items={items} backHref="/tests/nunchi" backLabel="눈치 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/nunchi-nature" className="tile">
+          <h3 className="tile-title">눈치 보는 성격, 정말 고쳐야 할까</h3>
+        </Link>
+      </div>
+
       <Comments pageId="test-nunchi" title="다들 뭐 나왔어요?" />
     </>
   );

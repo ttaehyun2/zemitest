@@ -1,4 +1,5 @@
 import Comments from "../../../../components/Comments";
+import Link from "next/link";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/careerTest";
 
@@ -33,6 +34,15 @@ export default function Page() {
         것이 중요합니다.
       </p>
       <TypeDirectory items={items} backHref="/tests/career" backLabel="직업 가치관 테스트 하러 가기" />
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
+        <Link href="/articles/cant-decide-career" className="tile">
+          <h3 className="tile-title">진로를 못 정하겠을 때 생각해볼 것들</h3>
+        </Link>
+      </div>
+
       <p className="disclaimer">
         이 분류는 가치관을 돌아보기 위한 참고 자료이며, 적성 검사나 진로 상담을
         대신하지 않습니다.

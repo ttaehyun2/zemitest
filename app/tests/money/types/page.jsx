@@ -53,6 +53,15 @@ export default function Page() {
         <h2>함께 읽어보기</h2>
       </div>
       <div className="grid">
+        <Link href="/articles/why-no-savings" className="tile">
+          <h3 className="tile-title">사회초년생이 돈을 못 모으는 진짜 이유</h3>
+        </Link>
+      </div>
+
+      <div className="section-head">
+        <h2>함께 읽어보기</h2>
+      </div>
+      <div className="grid">
         <Link href="/articles/compound-interest" className="tile">
           <h3 className="tile-title">복리는 왜 대부분 체감되지 않을까</h3>
         </Link>

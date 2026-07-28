@@ -16,6 +16,10 @@ const ALL = CHAPTERS.flatMap((ch) =>
   ch.scenes.map((sc) => ({ ...sc, chapter: ch }))
 );
 
+// 분기 장면(branch)은 일반 진행에서 건너뛰고, next 로 지목됐을 때만 등장합니다.
+const INDEX_BY_ID = {};
+ALL.forEach((sc, i) => (INDEX_BY_ID[sc.id] = i));
+
 export default function LifeSim() {
   const [screen, setScreen] = useState("intro");
   const [idx, setIdx] = useState(0);
@@ -29,6 +33,7 @@ export default function LifeSim() {
   function nextIndex(from, s, f) {
     for (let i = from; i < ALL.length; i++) {
       const sc = ALL[i];
+      if (sc.branch) continue; // 분기 전용 장면은 순서대로 나오지 않음
       if (!sc.cond || sc.cond(s, f)) return i;
     }
     return -1;
@@ -62,13 +67,26 @@ export default function LifeSim() {
     setLog([...log, { chapter: scene.chapter.title, choice: c.t, r: c.r }]);
     setScreen("feedback");
 
-    const n = nextIndex(idx + 1, s, f);
+    // 선택에 next 가 지정돼 있으면 그 장면으로 분기합니다.
+    // 분기 장면을 막 끝냈다면, 그 분기의 출발점 다음 일반 장면으로 복귀합니다.
+    let n;
+    if (c.next && INDEX_BY_ID[c.next] !== undefined) {
+      n = INDEX_BY_ID[c.next];
+    } else {
+      n = nextIndex(idx + 1, s, f);
+    }
     setIdx(n);
   }
 
   function proceed() {
     if (idx === -1) setScreen("result");
     else setScreen("play");
+  }
+
+  // 분기 장면을 끝낸 뒤 다음 일반 장면을 찾습니다.
+  function afterBranch(fromId, s, f) {
+    const i = INDEX_BY_ID[fromId];
+    return nextIndex(i + 1, s, f);
   }
 
   function restart() {
@@ -95,14 +113,14 @@ export default function LifeSim() {
             처음부터 살아봅니다
           </h1>
           <p className="lu-sub">
-            유년기부터 노년까지, 20번의 선택.
+            유년기부터 노년까지, 20여 번의 선택.
             <br />
-            선택은 되돌릴 수 없고 결말은 18가지입니다.
+            선택마다 다음 이야기가 달라지고 결말은 18가지입니다.
           </p>
           <button className="lu-btn" onClick={start}>
             인생 시작하기
           </button>
-          <p className="lu-mini">약 20장면 · 엔딩 18종 · 매번 달라짐</p>
+          <p className="lu-mini">20~26장면 · 엔딩 18종 · 경로 890가지</p>
         </div>
       )}
 
