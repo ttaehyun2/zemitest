@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
 
@@ -112,6 +114,7 @@ export default function MoneyTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-money"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.grade.grad[0]}, ${result.grade.grad[1]})`,
@@ -168,12 +171,15 @@ export default function MoneyTest() {
           </Link>
 
 
+          <ResultStats test="money" type={result.grade.grade} typeName={result.grade.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 경제력 점수는 ${result.totalPct}점 「${result.grade.emoji} ${result.grade.name}」\n제일 강한 영역: ${result.strong.label} ${result.strong.pct}%\n\n너의 경제력도 측정해봐 💰`}
               url="https://zemitest.com/tests/money"
               title="나의 경제력 테스트"
             />
+            <SaveImageButton targetId="result-card-money" filename="zemitest-money" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

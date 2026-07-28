@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Comments from "../../../../components/Comments";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/stressTest";
 
@@ -49,6 +50,7 @@ export default function Page() {
         이 내용은 일반적인 정보이며 진단이나 치료를 대신하지 않습니다. 힘든 상태가
         오래 이어진다면 가까운 사람이나 전문가에게 이야기해보시기를 권합니다.
       </p>
+      <Comments pageId="test-stress" title="다들 뭐 나왔어요?" />
     </>
   );
 }

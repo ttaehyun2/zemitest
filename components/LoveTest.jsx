@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS } from "../lib/loveTest";
 
@@ -81,6 +83,7 @@ export default function LoveTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-love"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
@@ -131,12 +134,15 @@ export default function LoveTest() {
           </Link>
 
 
+          <ResultStats test="love" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 연애 세계관은 「${t.emoji} ${t.name}」 ${t.pct}%\n"${t.tagline}"\n\n너의 연애 세계관도 알아봐 👀`}
               url="https://zemitest.com/tests/love"
               title="연애 세계관 테스트"
             />
+            <SaveImageButton targetId="result-card-love" filename="zemitest-love" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

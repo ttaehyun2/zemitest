@@ -1263,3 +1263,242 @@ a {
 .lu-readmore-main:hover {
   background: rgba(255, 255, 255, 0.26);
 }
+
+/* ── 이미지 저장 버튼 ── */
+.lu-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+}
+.lu-save:hover {
+  background: rgba(255, 255, 255, 0.26);
+  box-shadow: none;
+}
+.lu-save:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+.save-icon {
+  font-size: 17px;
+}
+
+/* ── 결과 통계 ── */
+.stats-box {
+  margin: 14px 0 0;
+  padding: 15px 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
+  text-align: center;
+  animation: lu-in 0.4s ease both;
+}
+.stats-main {
+  margin: 0 0 5px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.stats-main strong {
+  font-size: 17px;
+  font-weight: 900;
+  color: #ffd6a5;
+}
+.stats-sub {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-faint);
+  word-break: keep-all;
+}
+
+/* ── 댓글 ── */
+.cmt-wrap {
+  margin-top: 44px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.cmt-count {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 9px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffd6a5;
+  vertical-align: middle;
+}
+.cmt-form {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 22px;
+}
+.cmt-nick,
+.cmt-text {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+.cmt-nick::placeholder,
+.cmt-text::placeholder {
+  color: var(--ink-faint);
+}
+.cmt-nick:focus,
+.cmt-text:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.cmt-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.cmt-len {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+.cmt-submit {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #231343;
+  cursor: pointer;
+  background: linear-gradient(120deg, #ffd6a5, #ffb0d8 55%, #c9a5ff);
+  transition: transform 0.14s ease, opacity 0.14s ease;
+}
+.cmt-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.cmt-submit:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.cmt-error {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffb0c8;
+  word-break: keep-all;
+}
+.cmt-notice {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-faint);
+  word-break: keep-all;
+}
+.cmt-empty {
+  text-align: center;
+  padding: 26px 10px;
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+.cmt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cmt-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cmt-item:last-child {
+  border-bottom: none;
+}
+.cmt-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+.cmt-author {
+  font-size: 14px;
+  font-weight: 800;
+  color: #e6d8ff;
+}
+.cmt-time {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+.cmt-body {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #e4dbf7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* 관리 화면 */
+.admin-reload {
+  margin-left: 12px;
+  padding: 5px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.admin-reload:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.admin-group {
+  margin-bottom: 34px;
+}
+.admin-page {
+  font-size: 15px;
+  font-weight: 800;
+  color: #c9b6ff;
+  margin: 0 0 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.admin-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.admin-del,
+.admin-ban {
+  padding: 6px 14px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.admin-del:hover {
+  background: rgba(255, 120, 140, 0.3);
+  color: #fff;
+}
+.admin-ban:hover {
+  background: rgba(255, 80, 80, 0.35);
+  color: #fff;
+}

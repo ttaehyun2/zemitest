@@ -52,3 +52,35 @@ python3 tools-make-og.py
 
 Pretendard 폰트 경로는 스크립트 상단 FONT_DIR 에서 바꿀 수 있습니다.
 결과물은 public/og/ 에 저장됩니다.
+
+## 결과 통계 켜기 (Upstash Redis)
+
+통계 기능은 저장소가 연결됐을 때만 표시됩니다. 연결 전에도 사이트는 정상
+동작하며 통계 영역만 보이지 않습니다.
+
+1. Vercel 프로젝트 → Storage 탭 → Create Database
+2. Upstash for Redis 선택 (무료 플랜 있음)
+3. 프로젝트에 Connect — 환경변수가 자동 주입됩니다
+   - UPSTASH_REDIS_REST_URL
+   - UPSTASH_REDIS_REST_TOKEN
+4. Vercel 에서 Redeploy 하면 통계가 켜집니다
+
+로컬 테스트는 .env.local 에 위 두 값을 넣으면 됩니다.
+
+### 저장 구조
+- 키: stats:{테스트명} (해시)
+- 필드: 유형 키 / 값: 누적 횟수
+- 개인정보는 저장하지 않고 유형별 누적 카운트만 기록합니다.
+- 허용된 테스트/유형 값만 기록되도록 서버에서 검증합니다.
+
+## 결과 이미지 저장
+
+html-to-image 로 결과 카드를 PNG 로 내보냅니다.
+인스타그램은 웹 공유 API 를 제공하지 않아 캡처가 유일한 공유 수단이므로
+이 버튼이 그 과정을 대신합니다.
+
+## 댓글 기능
+
+설정 방법은 COMMENTS.md 를 참고하세요.
+필요 환경변수: ADMIN_TOKEN, IP_SALT (+ Upstash Redis)
+관리 화면: /admin/comments

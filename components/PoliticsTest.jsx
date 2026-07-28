@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard } from "./QuizShell";
 import { QUESTIONS, SCALE, MAX, classify } from "../lib/politicsTest";
 
@@ -131,6 +133,7 @@ export default function PoliticsTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-politics"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.quad.grad[0]}, ${result.quad.grad[1]})`,
@@ -174,12 +177,15 @@ export default function PoliticsTest() {
           </Link>
 
 
+          <ResultStats test="politics" type={result.quad.key} typeName={result.quad.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 정치 성향은 「${result.quad.emoji} ${result.quad.name}」\n경제: ${result.econLabel} ${result.econVal}%\n사회: ${result.socLabel} ${result.socVal}%\n\n너의 좌표도 찍어봐 🗳️`}
               url="https://zemitest.com/tests/politics"
               title="정치 성향 좌표 테스트"
             />
+            <SaveImageButton targetId="result-card-politics" filename="zemitest-politics" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

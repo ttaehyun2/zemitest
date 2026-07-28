@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, scoreToRanked } from "../lib/careerTest";
 
@@ -64,7 +66,7 @@ export default function CareerTest() {
 
       {screen === "result" && result && (
         <div className="lu-result-wrap">
-          <div className="lu-result-card"
+          <div id="result-card-career" className="lu-result-card"
                style={{ background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})` }}>
             <p className="lu-result-eyebrow">나의 직업 가치관</p>
             <div className="lu-orb" style={{ boxShadow: `0 0 60px 10px ${result.top.glow}` }}>
@@ -114,12 +116,15 @@ export default function CareerTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
+          <ResultStats test="career" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 직업 가치관은 「${result.top.emoji} ${result.top.name}」 ${result.top.pct}%\n"${result.top.tagline}"\n\n너는 일에서 뭘 중요하게 볼까? 🧭`}
               url="https://zemitest.com/tests/career"
               title="직업 가치관 테스트"
             />
+            <SaveImageButton targetId="result-card-career" filename="zemitest-career" />
             <button className="lu-btn lu-ghost" onClick={restart}>다시 하기</button>
           </div>
           <p className="lu-mini lu-center">친구들과 가치관을 비교해보세요 🧭</p>

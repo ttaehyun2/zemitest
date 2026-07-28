@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Comments from "../../../../components/Comments";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/spendingTest";
 
@@ -51,6 +52,7 @@ export default function Page() {
         이 분류는 소비 습관을 돌아보기 위한 참고 자료이며, 재무 상담을 대신하지
         않습니다.
       </p>
+      <Comments pageId="test-spending" title="다들 뭐 나왔어요?" />
     </>
   );
 }

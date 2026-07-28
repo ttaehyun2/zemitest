@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Comments from "../../../components/Comments";
 import { notFound } from "next/navigation";
 import { ARTICLES, getArticle } from "../../../lib/articles";
 
@@ -107,6 +108,8 @@ export default function ArticlePage({ params }) {
       <Link href="/tests/love" className="article-cta">
         나의 연애 유형이 궁금하다면? 테스트 하러 가기 →
       </Link>
+
+      <Comments pageId={`article-${article.slug}`} title="이 글에 대한 생각" />
     </article>
   );
 }

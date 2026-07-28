@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Comments from "../../../../components/Comments";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { QUADRANTS } from "../../../../lib/politicsTest";
 
@@ -57,6 +58,7 @@ export default function Page() {
         이 분류는 성향을 대략적으로 살펴보기 위한 것으로, 특정 정당이나 입장을
         지지하거나 권유하지 않습니다.
       </p>
+      <Comments pageId="test-politics" title="다들 뭐 나왔어요?" />
     </>
   );
 }

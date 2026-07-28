@@ -1,15 +1,15 @@
-import Link from "next/link";
 import { TESTS } from "../../lib/tests";
+import TestGrid from "../../components/TestGrid";
 
 export const metadata = {
   title: "전체 테스트 - 무료 심리테스트 모음",
   description:
-    "제미테스트의 모든 심리 테스트를 한곳에서. 연애 세계관, 전생, 스트레스 유형, 정치 성향, 경제력 테스트를 무료로 즐겨보세요.",
+    "제미테스트의 모든 심리 테스트를 한곳에서. 연애 세계관, 전생, 동물, 스트레스, 정치 성향, 직업 가치관, 소비 성향, 경제력 테스트를 무료로 즐겨보세요.",
   keywords: ["심리테스트 모음", "무료 테스트", "성향 테스트", "테스트 모음 사이트"],
   alternates: { canonical: "/tests" },
   openGraph: {
     title: "무료 심리 테스트 모음 - 제미테스트",
-    description: "가입 없이 바로 할 수 있는 5가지 성향 테스트.",
+    description: "가입 없이 바로 할 수 있는 성향 테스트 모음.",
     url: "https://zemitest.com/tests",
     images: [{ url: "/og/tests.png", width: 1200, height: 630 }],
   },
@@ -42,25 +42,7 @@ export default function TestsPage() {
               <h2>{cat.label}</h2>
               <span className="section-sub">{cat.sub}</span>
             </div>
-            <div className="grid">
-              {items.map((t) =>
-                t.ready ? (
-                  <Link key={t.slug} href={t.href} className="tile">
-                    <span className="tile-emoji">{t.emoji}</span>
-                    <h3 className="tile-title">{t.title}</h3>
-                    <p className="tile-desc">{t.desc}</p>
-                    <p className="tile-meta">{t.meta}</p>
-                  </Link>
-                ) : (
-                  <div key={t.slug} className="tile soon">
-                    <span className="tile-emoji">{t.emoji}</span>
-                    <h3 className="tile-title">{t.title}</h3>
-                    <p className="tile-desc">준비 중입니다.</p>
-                    <p className="tile-meta">COMING SOON</p>
-                  </div>
-                )
-              )}
-            </div>
+            <TestGrid tests={items} initial={3} />
           </div>
         );
       })}

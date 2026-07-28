@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/animalTest";
 
@@ -74,6 +76,7 @@ export default function AnimalTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-animal"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
@@ -139,12 +142,15 @@ export default function AnimalTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
+          <ResultStats test="animal" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나와 닮은 동물은 「${result.top.emoji} ${result.top.name}」 ${result.top.pct}%\n"${result.top.tagline}"\n\n너는 어떤 동물인지 알아봐 🐾`}
               url="https://zemitest.com/tests/animal"
               title="나와 닮은 동물 테스트"
             />
+            <SaveImageButton targetId="result-card-animal" filename="zemitest-animal" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

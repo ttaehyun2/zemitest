@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/spendingTest";
 
@@ -64,7 +66,7 @@ export default function SpendingTest() {
 
       {screen === "result" && result && (
         <div className="lu-result-wrap">
-          <div className="lu-result-card"
+          <div id="result-card-spending" className="lu-result-card"
                style={{ background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})` }}>
             <p className="lu-result-eyebrow">나의 소비 성향</p>
             <div className="lu-orb" style={{ boxShadow: `0 0 60px 10px ${result.top.glow}` }}>
@@ -125,12 +127,15 @@ export default function SpendingTest() {
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
+          <ResultStats test="spending" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 소비 성향은 「${result.top.emoji} ${result.top.name}」 ${result.top.pct}%\n"${result.top.tagline}"\n\n너는 어떤 소비 유형일까? 🛍️`}
               url="https://zemitest.com/tests/spending"
               title="소비 성향 테스트"
             />
+            <SaveImageButton targetId="result-card-spending" filename="zemitest-spending" />
             <button className="lu-btn lu-ghost" onClick={restart}>다시 하기</button>
           </div>
           <p className="lu-mini lu-center">친구들과 소비 유형 비교해보세요 🛍️</p>

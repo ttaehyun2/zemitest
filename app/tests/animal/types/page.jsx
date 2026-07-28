@@ -1,3 +1,4 @@
+import Comments from "../../../../components/Comments";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/animalTest";
 
@@ -36,6 +37,7 @@ export default function Page() {
         읽어보면 더 잘 맞습니다.
       </p>
       <TypeDirectory items={items} backHref="/tests/animal" backLabel="동물 테스트 하러 가기" />
+      <Comments pageId="test-animal" title="다들 뭐 나왔어요?" />
     </>
   );
 }

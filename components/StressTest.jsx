@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { QUESTIONS, scoreToRanked } from "../lib/stressTest";
 
@@ -74,6 +76,7 @@ export default function StressTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-stress"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
@@ -130,12 +133,15 @@ export default function StressTest() {
           </Link>
 
 
+          <ResultStats test="stress" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 스트레스 유형은 「${t.emoji} ${t.name}」 ${t.pct}%\n"${t.tagline}"\n\n너는 어떤 유형인지 알아봐 🌿`}
               url="https://zemitest.com/tests/stress"
               title="스트레스 유형 테스트"
             />
+            <SaveImageButton targetId="result-card-stress" filename="zemitest-stress" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>

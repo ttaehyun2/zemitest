@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Comments from "../../../../components/Comments";
 import TypeDirectory from "../../../../components/TypeDirectory";
 import { TYPES } from "../../../../lib/loveTest";
 
@@ -53,6 +54,7 @@ export default function Page() {
         </Link>
       </div>
 
+      <Comments pageId="test-love" title="다들 뭐 나왔어요?" />
     </>
   );
 }

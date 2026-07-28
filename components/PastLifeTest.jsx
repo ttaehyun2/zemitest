@@ -4,6 +4,8 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
+import SaveImageButton from "./SaveImageButton";
+import ResultStats from "./ResultStats";
 import { Intro, QuestionCard, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/pastLifeTest";
 
@@ -74,6 +76,7 @@ export default function PastLifeTest() {
       {screen === "result" && result && (
         <div className="lu-result-wrap">
           <div
+            id="result-card-pastlife"
             className="lu-result-card"
             style={{
               background: `linear-gradient(160deg, ${result.top.grad[0]}, ${result.top.grad[1]})`,
@@ -125,12 +128,15 @@ export default function PastLifeTest() {
           </Link>
 
 
+          <ResultStats test="pastlife" type={result.top.key} typeName={result.top.name} />
+
           <div className="lu-actions">
             <ShareButtons
               text={`나의 전생은 「${t.emoji} ${t.name}」 (일치도 ${t.pct}%)\n"${t.tagline}"\n\n너의 전생도 알아봐 🔮`}
               url="https://zemitest.com/tests/pastlife"
               title="전생 테스트"
             />
+            <SaveImageButton targetId="result-card-pastlife" filename="zemitest-pastlife" />
             <button className="lu-btn lu-ghost" onClick={restart}>
               다시 하기
             </button>
