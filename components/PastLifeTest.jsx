@@ -6,7 +6,7 @@ import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
-import { Intro, QuestionCard, Bar } from "./QuizShell";
+import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
 import { TYPES, QUESTIONS, scoreToRanked } from "../lib/pastLifeTest";
 
 export default function PastLifeTest() {
@@ -30,7 +30,7 @@ export default function PastLifeTest() {
     setHistory([...history, scores]);
     setScores(next);
     if (step + 1 < QUESTIONS.length) setStep(step + 1);
-    else setScreen("result");
+    else setScreen("ready");
   }
 
   function back() {
@@ -38,6 +38,14 @@ export default function PastLifeTest() {
     setScores(history[history.length - 1]);
     setHistory(history.slice(0, -1));
     setStep(Math.max(0, step - 1));
+  }
+
+  function backFromReady() {
+    setScreen("quiz");
+    if (history.length) {
+      setScores(history[history.length - 1]);
+      setHistory(history.slice(0, -1));
+    }
   }
 
   function restart() {
@@ -70,6 +78,15 @@ export default function PastLifeTest() {
           options={QUESTIONS[step].a.map((o) => o.t)}
           onPick={pick}
           onBack={back}
+        />
+      )}
+
+      {screen === "ready" && (
+        <ReadyScreen
+          emoji="🔮"
+          total={QUESTIONS.length}
+          onShow={() => setScreen("result")}
+          onBack={backFromReady}
         />
       )}
 
@@ -132,7 +149,7 @@ export default function PastLifeTest() {
 
           <div className="lu-actions">
             <ShareButtons
-              text={`나의 전생은 「${t.emoji} ${t.name}」 (일치도 ${t.pct}%)\n"${t.tagline}"\n\n너의 전생도 알아봐 🔮`}
+              text={`나의 전생은 「${result.top.emoji} ${result.top.name}」 (일치도 ${result.top.pct}%)\n"${result.top.tagline}"\n\n너의 전생도 알아봐 🔮`}
               url="https://zemitest.com/tests/pastlife"
               title="전생 테스트"
             />

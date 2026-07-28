@@ -75,3 +75,29 @@ export function Bar({ label, pct, color, sub }) {
     </div>
   );
 }
+
+// 모든 문항을 마친 뒤, 결과를 바로 띄우지 않고 한 번 확인받는 화면
+export function ReadyScreen({ emoji = "🎉", total, onShow, onBack }) {
+  return (
+    <div className="lu-card lu-intro">
+      <div className="lu-orb-mini">{emoji}</div>
+      <p className="lu-eyebrow">ALL DONE</p>
+      <h1 className="lu-title">
+        {total}문항 모두 완료!
+      </h1>
+      <p className="lu-sub">
+        결과가 준비됐어요.
+        <br />
+        아래 버튼을 눌러 확인해보세요.
+      </p>
+      <button className="lu-btn" onClick={onShow}>
+        결과 보기
+      </button>
+      {onBack && (
+        <button className="lu-back" onClick={onBack}>
+          ← 마지막 문항 다시 보기
+        </button>
+      )}
+    </div>
+  );
+}

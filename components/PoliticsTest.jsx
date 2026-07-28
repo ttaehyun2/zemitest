@@ -6,7 +6,7 @@ import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
-import { Intro, QuestionCard } from "./QuizShell";
+import { Intro, QuestionCard, ReadyScreen } from "./QuizShell";
 import { QUESTIONS, SCALE, MAX, classify } from "../lib/politicsTest";
 
 // 2축 좌표 그래프
@@ -91,11 +91,15 @@ export default function PoliticsTest() {
     const next = [...answers.slice(0, step), v];
     setAnswers(next);
     if (step + 1 < QUESTIONS.length) setStep(step + 1);
-    else setScreen("result");
+    else setScreen("ready");
   }
 
   function back() {
     if (step > 0) setStep(step - 1);
+  }
+
+  function backFromReady() {
+    setScreen("quiz");
   }
 
   function restart() {
@@ -127,6 +131,15 @@ export default function PoliticsTest() {
           options={SCALE.map((s) => s.t)}
           onPick={pick}
           onBack={back}
+        />
+      )}
+
+      {screen === "ready" && (
+        <ReadyScreen
+          emoji="🗳️"
+          total={QUESTIONS.length}
+          onShow={() => setScreen("result")}
+          onBack={backFromReady}
         />
       )}
 

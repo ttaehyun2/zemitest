@@ -6,7 +6,7 @@ import Stars from "./Stars";
 import ShareButtons from "./ShareButtons";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
-import { Intro, QuestionCard, Bar } from "./QuizShell";
+import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
 
 // 점수를 원형 게이지로 표시. 숫자는 정중앙에 배치됩니다.
@@ -72,11 +72,15 @@ export default function MoneyTest() {
     const next = [...answers.slice(0, step), p];
     setAnswers(next);
     if (step + 1 < QUESTIONS.length) setStep(step + 1);
-    else setScreen("result");
+    else setScreen("ready");
   }
 
   function back() {
     if (step > 0) setStep(step - 1);
+  }
+
+  function backFromReady() {
+    setScreen("quiz");
   }
 
   function restart() {
@@ -108,6 +112,15 @@ export default function MoneyTest() {
           options={QUESTIONS[step].a.map((o) => o.t)}
           onPick={pick}
           onBack={back}
+        />
+      )}
+
+      {screen === "ready" && (
+        <ReadyScreen
+          emoji="💰"
+          total={QUESTIONS.length}
+          onShow={() => setScreen("result")}
+          onBack={backFromReady}
         />
       )}
 
