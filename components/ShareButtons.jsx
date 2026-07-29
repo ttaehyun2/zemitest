@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { loadKakao, kakaoEnabled } from "./kakao";
 
 /**
  * 결과 공유 버튼.
@@ -57,6 +58,35 @@ export default function ShareButtons({ text, url = "https://zemitest.com", title
     }
   }
 
+  // 카카오톡 공유. 키가 설정되지 않았으면 버튼 자체가 뜨지 않습니다.
+  async function shareKakao() {
+    try {
+      const Kakao = await loadKakao();
+      if (!Kakao) return;
+      // 결과 화면 썸네일 (테스트별 OG 이미지)
+      const slug = url.split("/tests/")[1]?.split("/")[0];
+      const img = slug
+        ? `https://zemitest.com/og/${slug}.png`
+        : "https://zemitest.com/og/default.png";
+
+      Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title,
+          description: text.split("\n").filter(Boolean).slice(0, 2).join(" · "),
+          imageUrl: img,
+          link: { mobileWebUrl: url, webUrl: url },
+        },
+        buttons: [
+          { title: "나도 해보기", link: { mobileWebUrl: url, webUrl: url } },
+        ],
+      });
+    } catch (e) {
+      console.error("카카오 공유 실패:", e);
+      copyLink();
+    }
+  }
+
   function openWindow(href) {
     window.open(href, "_blank", "noopener,noreferrer,width=600,height=520");
   }
@@ -71,6 +101,13 @@ export default function ShareButtons({ text, url = "https://zemitest.com", title
 
       {showAll && (
         <div className="share-grid">
+          {kakaoEnabled() && (
+            <button className="share-item share-kakao" onClick={shareKakao}>
+              <span className="share-icon">💬</span>
+              <span>카카오톡</span>
+            </button>
+          )}
+
           <button
             className="share-item share-x"
             onClick={() => openWindow(`https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}`)}
@@ -102,9 +139,11 @@ export default function ShareButtons({ text, url = "https://zemitest.com", title
             <strong> 결과 이미지로 저장</strong> 버튼으로 이미지를 받은 뒤
             올려주세요. 휴대폰으로 접속하면 공유 버튼에서 바로 앱 선택이 뜹니다.
           </p>
-          <p className="share-note-text">
-            카카오톡은 링크를 복사해 붙여넣으면 미리보기가 뜹니다.
-          </p>
+          {!kakaoEnabled() && (
+            <p className="share-note-text">
+              카카오톡은 링크를 복사해 붙여넣으면 미리보기가 뜹니다.
+            </p>
+          )}
         </div>
       )}
     </div>

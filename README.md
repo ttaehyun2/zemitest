@@ -84,3 +84,15 @@ html-to-image 로 결과 카드를 PNG 로 내보냅니다.
 설정 방법은 COMMENTS.md 를 참고하세요.
 필요 환경변수: ADMIN_TOKEN, IP_SALT (+ Upstash Redis)
 관리 화면: /admin/comments
+
+## 카카오톡 공유 설정
+
+1. developers.kakao.com 접속 → 카카오 계정으로 로그인
+2. 내 애플리케이션 → 애플리케이션 추가하기 (앱 이름: 제미테스트)
+3. 만든 앱 → 앱 키 → **JavaScript 키** 복사
+4. 앱 설정 → 플랫폼 → Web 플랫폼 등록 → 사이트 도메인에 https://zemitest.com 추가
+5. Vercel → Settings → Environment Variables 에 추가:
+   - NEXT_PUBLIC_KAKAO_KEY = (JavaScript 키)
+6. Redeploy
+
+설정 전에는 카카오톡 버튼이 표시되지 않고, 나머지 공유 기능은 정상 동작합니다.
