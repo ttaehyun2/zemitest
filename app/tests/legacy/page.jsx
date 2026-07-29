@@ -16,7 +16,7 @@ export const metadata = {
 
 const JSON_LD = {
   "@context": "https://schema.org", "@type": "Quiz",
-  name: "죽기 직전 어떤 사람으로 기억될까? (무료)", url: "https://zemitest.com/tests/legacy", inLanguage: "ko-KR",
+  name: "죽기 직전 어떤 사람으로 기억될까? (무료)", url: "https://zemitest.com/tests/legacy", image: "https://zemitest.com/og/legacy.png", inLanguage: "ko-KR",
 };
 
 export default function Page() {

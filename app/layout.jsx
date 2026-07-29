@@ -9,8 +9,10 @@ export const metadata = {
     template: "%s | 제미테스트",
   },
   description:
-    "질문 몇 개로 나를 알아보는 재미있는 무료 심리 테스트 모음. 연애 세계관 테스트, 경제력 테스트, 정치 성향 좌표 테스트를 지금 무료로 시작해보세요!",
+    "인생 시뮬레이션, 눈치 테스트, 연애 세계관, 정치 성향까지 17가지 무료 심리 테스트. 결과는 상위 %와 함께 나오고 친구들과 바로 공유할 수 있습니다.",
   keywords: [
+    "인생 시뮬레이션",
+    "눈치 테스트",
     "심리테스트",
     "무료 심리테스트",
     "성향테스트",
@@ -28,13 +30,22 @@ export const metadata = {
   alternates: {
     canonical: "/",
   },
+  // 구글은 48의 배수 정사각형 파비콘을 권장합니다
+  icons: {
+    icon: [
+      { url: "/icon-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     siteName: "제미테스트",
     locale: "ko_KR",
     title: "제미테스트 - 무료 심리 테스트 모음",
     description:
-      "연애 세계관, 경제력, 정치 성향까지. 질문 몇 개로 나를 알아보는 무료 심리 테스트를 지금 시작해보세요!",
+      "인생 시뮬레이션부터 눈치·연애·정치 성향까지 17가지 무료 심리 테스트. 지금 바로 시작해보세요!",
     url: "https://zemitest.com",
     images: [
       { url: "/og/default.png", width: 1200, height: 630, alt: "제미테스트" },
@@ -44,7 +55,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "제미테스트 - 무료 심리 테스트 모음",
     description:
-      "연애 세계관, 경제력, 정치 성향까지. 질문 몇 개로 나를 알아보는 무료 심리 테스트.",
+      "인생 시뮬레이션부터 눈치·연애·정치 성향까지 17가지 무료 심리 테스트.",
     images: ["/og/default.png"],
   },
   robots: {
@@ -72,8 +83,9 @@ const JSON_LD = {
   alternateName: "ZEMI TEST",
   url: "https://zemitest.com",
   description:
-    "연애 세계관, 경제력, 정치 성향 등 무료 심리 테스트와 성향 테스트를 제공하는 사이트",
+    "인생 시뮬레이션, 눈치, 연애, 정치 성향 등 17가지 무료 심리 테스트를 제공하는 사이트",
   inLanguage: "ko-KR",
+  image: "https://zemitest.com/og/default.png",
   potentialAction: {
     "@type": "SearchAction",
     target: "https://zemitest.com/articles?q={search_term_string}",

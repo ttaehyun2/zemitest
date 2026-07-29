@@ -16,7 +16,7 @@ export const metadata = {
 
 const JSON_LD = {
   "@context": "https://schema.org", "@type": "Quiz",
-  name: "누구를 살릴래? - 도덕관 테스트 (무료)", url: "https://zemitest.com/tests/moral", inLanguage: "ko-KR",
+  name: "누구를 살릴래? - 도덕관 테스트 (무료)", url: "https://zemitest.com/tests/moral", image: "https://zemitest.com/og/moral.png", inLanguage: "ko-KR",
 };
 
 export default function Page() {

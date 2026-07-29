@@ -16,9 +16,9 @@ const ALLOWED = {
   money: ["S", "A", "B", "C", "D"],
   moral: ["util", "duty", "bond", "guard", "situation", "just"],
   legacy: ["tree", "fire", "candle", "path", "laugh", "make", "stand", "bridge"],
-  lifesim: ["collapse","broke","disgraced","hollow","workhorse","lonelytop","legend",
-            "reborn","quietrich","giver","mentor","creator","family","freesoul",
-            "comeback","gambler","healthy","ordinary"],
+  lifesim: ["starve","prison","forgotten","burnedout","accident","overwork","gaveout","godmode","monster","ruined","collapse","broke","disgraced","hollow",
+            "workhorse","lonelytop","legend","reborn","quietrich","giver","mentor",
+            "creator","family","freesoul","comeback","gambler","healthy","ordinary"],
 };
 
 function getRedis() {
@@ -46,7 +46,20 @@ function summarize(test, counts) {
 
 // ── 점수형 테스트: 점수 분포를 기록하고 백분위를 돌려줍니다 ──
 // 유형형과 달리 0~100 점수를 버킷에 누적해 "상위 몇 %"를 실제 데이터로 계산합니다.
-const SCORE_TESTS = ["nunchi", "difficulty", "island", "social", "liar", "human"];
+// ── 등수 계산용 기준 분포 ──
+// 참여자가 한두 명일 때 "상위 100%" 같은 결과가 나오지 않도록,
+// 가상 참여자 분포를 섞어 완만하게 만듭니다.
+// 실제 참여자가 쌓이면 이 영향은 자연스럽게 옅어집니다.
+const PRIOR_STRENGTH = 45;  // 가상 참여자 수에 해당
+const PRIOR_MEAN = 58;      // 이런 테스트의 평균적인 점수대
+const PRIOR_SD = 16;
+const RELIABLE = 40;        // 이 인원을 넘으면 추정치 표시를 뗍니다
+
+function gaussian(x, mean, sd) {
+  return Math.exp(-((x - mean) ** 2) / (2 * sd * sd)) / (sd * Math.sqrt(2 * Math.PI));
+}
+
+const SCORE_TESTS = ["nunchi", "difficulty", "island", "social", "liar", "human", "youtube", "money"];
 
 export async function PUT(req) {
   try {
@@ -65,8 +78,22 @@ export async function PUT(req) {
     await redis.hincrby(key, String(n), 1);
     const counts = (await redis.hgetall(key)) || {};
 
+    // 실제 참여자 집계
+    let real = 0;
+    Object.values(counts).forEach((v) => (real += Number(v) || 0));
+
+    // 참여자가 적을 때 등수가 요동치는 것을 막기 위해
+    // 기준 분포(가상 참여자)를 섞어 계산합니다.
+    // 실제 참여자가 늘면 기준 분포의 영향은 자연히 사라집니다.
+    const blended = { ...counts };
+    Object.keys(blended).forEach((k) => (blended[k] = Number(blended[k]) || 0));
+    for (let sc = 0; sc <= 100; sc++) {
+      const w = PRIOR_STRENGTH * gaussian(sc, PRIOR_MEAN, PRIOR_SD);
+      blended[sc] = (blended[sc] || 0) + w;
+    }
+
     let total = 0, below = 0, same = 0;
-    Object.entries(counts).forEach(([k, v]) => {
+    Object.entries(blended).forEach(([k, v]) => {
       const c = Number(v) || 0;
       total += c;
       if (Number(k) < n) below += c;
@@ -77,16 +104,18 @@ export async function PUT(req) {
     const percentile = total ? ((below + same / 2) / total) * 100 : 50;
     const topPct = Math.max(1, Math.min(99, Math.round(100 - percentile)));
 
+    // 평균은 실제 데이터로만 (기준 분포를 섞으면 왜곡됩니다)
+    const realSum = Object.entries(counts).reduce(
+      (acc, [k, v]) => acc + Number(k) * (Number(v) || 0), 0
+    );
+
     return NextResponse.json({
       enabled: true,
-      total,
-      topPct,        // 상위 몇 %
+      total: real,                 // 실제 참여자 수
+      estimated: real < RELIABLE,  // 아직 표본이 적어 추정치인지
+      topPct,
       percentile: Math.round(percentile),
-      average: total
-        ? Math.round(
-            Object.entries(counts).reduce((s, [k, v]) => s + Number(k) * (Number(v) || 0), 0) / total
-          )
-        : null,
+      average: real ? Math.round(realSum / real) : null,
     });
   } catch (e) {
     console.error("stats PUT error:", e);

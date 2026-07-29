@@ -20,6 +20,7 @@ const JSON_LD = {
   "@type": "Quiz",
   name: "DifficultyTest",
   url: "https://zemitest.com/tests/difficulty",
+  image: "https://zemitest.com/og/difficulty.png",
   inLanguage: "ko-KR",
 };
 

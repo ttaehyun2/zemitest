@@ -26,7 +26,7 @@ const JSON_LD = {
   "@context": "https://schema.org", "@type": "Quiz",
   name: "소비 성향 테스트",
   description: "22문항으로 알아보는 소비 성향 무료 테스트",
-  url: "https://zemitest.com/tests/spending", inLanguage: "ko-KR",
+  url: "https://zemitest.com/tests/spending", image: "https://zemitest.com/og/spending.png", inLanguage: "ko-KR",
 };
 
 export default function Page() {

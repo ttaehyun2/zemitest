@@ -28,6 +28,7 @@ const JSON_LD = {
   name: "스트레스 유형과 힐링 처방 테스트",
   description: "24문항으로 알아보는 스트레스 반응 유형 무료 테스트",
   url: "https://zemitest.com/tests/stress",
+  image: "https://zemitest.com/og/stress.png",
   inLanguage: "ko-KR",
 };
 

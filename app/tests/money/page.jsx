@@ -28,6 +28,7 @@ const JSON_LD = {
   name: "나의 경제력 테스트",
   description: "24문항으로 진단하는 금융 습관 무료 테스트",
   url: "https://zemitest.com/tests/money",
+  image: "https://zemitest.com/og/money.png",
   inLanguage: "ko-KR",
 };
 

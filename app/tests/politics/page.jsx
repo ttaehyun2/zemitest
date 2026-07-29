@@ -28,6 +28,7 @@ const JSON_LD = {
   name: "정치 성향 좌표 테스트",
   description: "20문항으로 알아보는 정치 성향 무료 테스트",
   url: "https://zemitest.com/tests/politics",
+  image: "https://zemitest.com/og/politics.png",
   inLanguage: "ko-KR",
 };
 

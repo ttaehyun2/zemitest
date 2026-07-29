@@ -19,6 +19,7 @@ const JSON_LD = {
   "@type": "Quiz",
   name: "너는 상위 몇 프로의 인간인가? - 종합 능력치 테스트",
   url: "https://zemitest.com/tests/human",
+  image: "https://zemitest.com/og/human.png",
   inLanguage: "ko-KR",
 };
 

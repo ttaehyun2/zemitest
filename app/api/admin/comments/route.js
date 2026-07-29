@@ -16,19 +16,39 @@ function getRedis() {
  * ADMIN_TOKEN 환경변수와 요청 헤더를 비교합니다.
  * 길이가 달라도 시간차로 추측당하지 않도록 고정 길이 해시를 비교합니다.
  */
-function isAdmin(req) {
-  const expected = process.env.ADMIN_TOKEN;
-  if (!expected) return false; // 토큰 미설정 시 관리 기능 자체를 잠금
-  const given = req.headers.get("x-admin-token") || "";
+/**
+ * 관리자 인증 결과.
+ *  ok        : 통과
+ *  noconfig  : 서버에 ADMIN_TOKEN 이 설정되지 않음
+ *  wrong     : 토큰 불일치
+ *
+ * 환경변수를 복사·붙여넣기할 때 앞뒤 공백이나 줄바꿈이 섞이는 일이 잦아
+ * 양쪽 모두 trim 후 비교합니다.
+ */
+function checkAdmin(req) {
+  const expected = (process.env.ADMIN_TOKEN || "").trim();
+  if (!expected) return "noconfig";
+  const given = (req.headers.get("x-admin-token") || "").trim();
+  if (!given) return "wrong";
   const a = crypto.createHash("sha256").update(given).digest();
   const b = crypto.createHash("sha256").update(expected).digest();
-  return crypto.timingSafeEqual(a, b);
+  return crypto.timingSafeEqual(a, b) ? "ok" : "wrong";
 }
 
 // 전체 댓글 조회 (페이지별)
 export async function GET(req) {
-  if (!isAdmin(req)) {
-    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const auth = checkAdmin(req);
+  if (auth !== "ok") {
+    return NextResponse.json(
+      {
+        error: auth,
+        message:
+          auth === "noconfig"
+            ? "서버에 ADMIN_TOKEN 환경변수가 설정되지 않았어요. Vercel 설정 후 재배포가 필요합니다."
+            : "토큰이 맞지 않아요. 앞뒤 공백이 섞이지 않았는지 확인해주세요.",
+      },
+      { status: 401 }
+    );
   }
   const redis = getRedis();
   if (!redis) return NextResponse.json({ enabled: false, pages: [] });
@@ -46,7 +66,7 @@ export async function GET(req) {
 
 // 댓글 삭제 (단건) 또는 특정 작성자 전체 삭제
 export async function DELETE(req) {
-  if (!isAdmin(req)) {
+  if (checkAdmin(req) !== "ok") {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
   const redis = getRedis();

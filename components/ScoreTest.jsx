@@ -10,6 +10,7 @@ import CommentJump from "./CommentJump";
 import ScoreResult from "./ScoreResult";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
 import { cardToneClass } from "../lib/contrast";
+import { getGrade, estimateTop } from "../lib/grade";
 
 /**
  * 점수형 테스트 공용 엔진.
@@ -23,7 +24,7 @@ export default function ScoreTest({ config }) {
     emoji, eyebrow, title, sub, meta,
     scoreLabel = "점수", scoreUnit = "점",
     areas, maxPerArea,
-    resultEyebrow, shareText, headline,
+    resultEyebrow, shareText, headline, extra,
     disclaimer, footerNote,
   } = config;
 
@@ -46,11 +47,14 @@ export default function ScoreTest({ config }) {
         const a = questions[i].area;
         if (a in sums) sums[a] += v;
       });
+      // maxPerArea 는 숫자 하나이거나 영역별 값 객체일 수 있습니다
+      const maxOf = (k) =>
+        typeof maxPerArea === "number" ? maxPerArea : maxPerArea[k];
       areaScores = Object.keys(areas)
-        .map((k) => ({ ...areas[k], pct: Math.round((sums[k] / maxPerArea) * 100) }))
+        .map((k) => ({ ...areas[k], pct: Math.round((sums[k] / maxOf(k)) * 100) }))
         .sort((a, b) => b.pct - a.pct);
     }
-    return { score, level: getLevel(score), areaScores };
+    return { score, level: getLevel(score), areaScores, grade: getGrade(score), top: estimateTop(score) };
   }, [screen, answers, maxScore, getLevel]);
 
   function pick(i) {
@@ -119,6 +123,19 @@ export default function ScoreTest({ config }) {
               <p className="lu-result-tagline">{result.level.label}</p>
             )}
             <p className="lu-result-desc">{result.level.desc}</p>
+
+            {extra && (() => {
+              const ex = extra(result);
+              return ex ? (
+                <div className="extra-box">
+                  <p className="extra-label">{ex.label}</p>
+                  <p className="extra-name">
+                    {ex.emoji} {ex.name}
+                  </p>
+                  {ex.desc && <p className="extra-desc">{ex.desc}</p>}
+                </div>
+              ) : null;
+            })()}
 
             {result.areaScores && (
               <div className="lu-bars">

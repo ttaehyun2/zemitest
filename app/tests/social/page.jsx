@@ -19,6 +19,7 @@ const JSON_LD = {
   "@type": "Quiz",
   name: "사회생활 생존력 테스트 - 나는 상위 몇 %? (무료)",
   url: "https://zemitest.com/tests/social",
+  image: "https://zemitest.com/og/social.png",
   inLanguage: "ko-KR",
 };
 

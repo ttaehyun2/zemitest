@@ -9,7 +9,8 @@ import Comments from "./Comments";
 import CommentJump from "./CommentJump";
 import ResultStats from "./ResultStats";
 import { cardToneClass } from "../lib/contrast";
-import { STATS, START, CHAPTERS, pickEnding, clamp } from "../lib/lifeSim";
+import { STATS, START, CHAPTERS, pickEnding, clamp, barRatio, overRatio,
+         pickDeath, isDead, agingCost } from "../lib/lifeSim";
 
 // 모든 장면을 순서대로 펼쳐둡니다 (조건은 진행 중에 검사)
 const ALL = CHAPTERS.flatMap((ch) =>
@@ -28,6 +29,7 @@ export default function LifeSim() {
   const [log, setLog] = useState([]);      // 지나온 선택 기록
   const [lastGain, setLastGain] = useState(null);
   const [cmtCount, setCmtCount] = useState(null);
+  const [death, setDeath] = useState(null);
 
   // 현재 조건을 만족하는 다음 장면 찾기
   function nextIndex(from, s, f) {
@@ -58,13 +60,38 @@ export default function LifeSim() {
     const c = scene.choices[ci];
     const s = { ...stats };
     Object.entries(c.e).forEach(([k, v]) => (s[k] = clamp(s[k] + v)));
+
+    // 다음 장면이 새 챕터라면 나이만큼 건강이 깎입니다
+    const nextIdxPreview =
+      c.next && INDEX_BY_ID[c.next] !== undefined
+        ? INDEX_BY_ID[c.next]
+        : nextIndex(idx + 1, s, new Set([...flags, ...(c.f ? [c.f] : [])]));
+    const nextScene = nextIdxPreview >= 0 ? ALL[nextIdxPreview] : null;
+    let aged = 0;
+    if (nextScene && nextScene.chapter.key !== scene.chapter.key) {
+      aged = agingCost(nextScene.chapter);
+      if (aged) s.health = clamp(s.health + aged);
+    }
     const f = new Set(flags);
     if (c.f) f.add(c.f);
 
     setStats(s);
     setFlags(f);
-    setLastGain({ e: c.e, r: c.r, chapter: scene.chapter.title, choice: c.t });
+    setLastGain({ e: c.e, r: c.r, chapter: scene.chapter.title, choice: c.t, aged, nextChapter: nextScene?.chapter });
     setLog([...log, { chapter: scene.chapter.title, choice: c.t, r: c.r }]);
+
+    // 건강이 바닥나거나 돈이 떨어지면 인생이 여기서 끝납니다. 예고는 없습니다.
+    if (isDead(s)) {
+      setDeath({
+        ...pickDeath(s, f),
+        when: scene.chapter.deathAge || scene.chapter.title,
+        chapter: scene.chapter.title,
+      });
+      setScreen("feedback");
+      setIdx(-1);
+      return;
+    }
+
     setScreen("feedback");
 
     // 선택에 next 가 지정돼 있으면 그 장면으로 분기합니다.
@@ -79,7 +106,8 @@ export default function LifeSim() {
   }
 
   function proceed() {
-    if (idx === -1) setScreen("result");
+    if (death) setScreen("dead");
+    else if (idx === -1) setScreen("result");
     else setScreen("play");
   }
 
@@ -90,6 +118,7 @@ export default function LifeSim() {
   }
 
   function restart() {
+    setDeath(null);
     setScreen("intro");
     setStats({ ...START });
     setFlags(new Set());
@@ -113,14 +142,16 @@ export default function LifeSim() {
             처음부터 살아봅니다
           </h1>
           <p className="lu-sub">
-            유년기부터 노년까지, 20여 번의 선택.
+            유년기부터 노년까지 30여 번의 선택.
             <br />
-            선택마다 다음 이야기가 달라지고 결말은 18가지입니다.
+            건강이나 돈을 잃으면 예고 없이 끝나고,
+            <br />
+            한계를 넘으면 숨겨진 엔딩이 열립니다.
           </p>
           <button className="lu-btn" onClick={start}>
             인생 시작하기
           </button>
-          <p className="lu-mini">20~26장면 · 엔딩 18종 · 경로 890가지</p>
+          <p className="lu-mini">28~36장면 · 엔딩 28종 · 예고 없는 죽음</p>
         </div>
       )}
 
@@ -165,9 +196,78 @@ export default function LifeSim() {
             ))}
           </div>
 
+          {lastGain.aged ? (
+            <p className="fb-aging">
+              ⏳ {lastGain.nextChapter?.emoji} {lastGain.nextChapter?.title}에 접어듭니다 ·
+              나이로 건강 {lastGain.aged}
+            </p>
+          ) : null}
+
           <button className="lu-btn" onClick={proceed}>
-            {idx === -1 ? "인생을 마무리한다" : "계속"}
+            {death ? "그리고..." : idx === -1 ? "인생을 마무리한다" : "계속"}
           </button>
+        </div>
+      )}
+
+      {screen === "dead" && death && (
+        <div className="lu-result-wrap">
+          <div id="result-card-lifesim"
+            className={`lu-result-card${cardToneClass(death.grad)}`}
+            style={{ background: `linear-gradient(160deg, ${death.grad[0]}, ${death.grad[1]})` }}>
+            <p className="lu-result-eyebrow">인생이 여기서 끝났습니다</p>
+            <div className="death-mark">
+              <span className="death-emoji">{death.emoji}</span>
+            </div>
+            <h2 className="lu-result-name">{death.title}</h2>
+            <p className="death-when">{death.when} 멈췄습니다</p>
+            <p className="lu-result-tagline">&ldquo;{death.line}&rdquo;</p>
+            <p className="lu-result-desc">{death.text}</p>
+
+            <div className="lu-bars">
+              <p className="lu-bars-title">마지막 능력치</p>
+              {Object.values(STATS).map((st) => {
+                const v = stats[st.key];
+                return (
+                  <div className="bar-row" key={st.key}>
+                    <div className="bar-head">
+                      <span className="bar-label">{st.emoji} {st.label}</span>
+                      <span className={`bar-pct${v > 100 ? " over" : ""}${v < 0 ? " minus" : ""}`}>{v}</span>
+                    </div>
+                    <div className="bar-track">
+                      <div className="bar-fill" style={{ width: `${barRatio(v) * 100}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="info-box">
+              <p className="info-title">📖 여기까지의 인생</p>
+              <ol className="life-log">
+                {log.map((l, i) => (
+                  <li key={i}><span className="life-ch">{l.chapter}</span> {l.choice}</li>
+                ))}
+              </ol>
+            </div>
+
+            <p className="lu-watermark">zemitest.com</p>
+          </div>
+
+          <p className="disclaimer">
+            건강이나 재력이 바닥나면 예고 없이 인생이 끝납니다. 다시 살아보면 다른
+            결말에 도착할 수 있어요.
+          </p>
+
+          <div className="lu-actions">
+            <ShareButtons
+              text={`내 인생은 ${death.when} 끝났다 「${death.emoji} ${death.title}」\n"${death.line}"\n\n너는 끝까지 살 수 있는지 해봐 🎲`}
+              url="https://zemitest.com/tests/lifesim" title="인생 시뮬레이션" />
+            <SaveImageButton targetId="result-card-lifesim" filename="zemitest-lifesim" />
+            <button className="lu-btn lu-ghost" onClick={restart}>다시 살아보기</button>
+          </div>
+          <p className="lu-mini lu-center">건강을 챙기면서 다시 도전해보세요 🎲</p>
+
+          <Comments pageId="test-lifesim" title="다들 어떤 엔딩 나왔어요?" onCount={setCmtCount} />
         </div>
       )}
 
@@ -186,17 +286,29 @@ export default function LifeSim() {
 
             <div className="lu-bars">
               <p className="lu-bars-title">최종 능력치</p>
-              {Object.values(STATS).map((st) => (
-                <div className="bar-row" key={st.key}>
-                  <div className="bar-head">
-                    <span className="bar-label">{st.emoji} {st.label}</span>
-                    <span className="bar-pct">{result.stats[st.key]}</span>
+              {Object.values(STATS).map((st) => {
+                const v = result.stats[st.key];
+                const over = overRatio(v);
+                return (
+                  <div className="bar-row" key={st.key}>
+                    <div className="bar-head">
+                      <span className="bar-label">
+                        {st.emoji} {st.label}
+                        {v > 100 && <span className="over-tag">한계 돌파</span>}
+                      </span>
+                      <span className={`bar-pct${v > 100 ? " over" : ""}${v < 0 ? " minus" : ""}`}>
+                        {v}
+                      </span>
+                    </div>
+                    <div className="bar-track">
+                      <div className="bar-fill" style={{ width: `${barRatio(v) * 100}%` }} />
+                      {over > 0 && (
+                        <div className="bar-over" style={{ width: `${over * 100}%` }} />
+                      )}
+                    </div>
                   </div>
-                  <div className="bar-track">
-                    <div className="bar-fill" style={{ width: `${result.stats[st.key]}%` }} />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="info-box">
@@ -214,7 +326,7 @@ export default function LifeSim() {
           </div>
 
           <Link href="/tests/lifesim/types#endings" className="lu-readmore lu-readmore-main">
-            <span>18가지 엔딩 전부 보기</span>
+            <span>28가지 엔딩 전부 보기</span>
             <span className="lu-readmore-arrow">→</span>
           </Link>
 
@@ -240,15 +352,25 @@ export default function LifeSim() {
 function StatBar({ stats }) {
   return (
     <div className="sim-stats">
-      {Object.values(STATS).map((st) => (
-        <div className="sim-stat" key={st.key}>
-          <span className="sim-stat-emoji">{st.emoji}</span>
-          <div className="sim-stat-track">
-            <div className="sim-stat-fill" style={{ width: `${stats[st.key]}%` }} />
+      {Object.values(STATS).map((st) => {
+        const v = stats[st.key];
+        const over = overRatio(v);
+        return (
+          <div className="sim-stat" key={st.key}>
+            <span className="sim-stat-emoji">{st.emoji}</span>
+            <div className="sim-stat-track">
+              <div className="sim-stat-fill" style={{ width: `${barRatio(v) * 100}%` }} />
+              {/* 100 을 넘으면 금색 막대가 덧씌워집니다 */}
+              {over > 0 && (
+                <div className="sim-stat-over" style={{ width: `${over * 100}%` }} />
+              )}
+            </div>
+            <span className={`sim-stat-num${v > 100 ? " over" : ""}${v < 0 ? " minus" : ""}`}>
+              {v}
+            </span>
           </div>
-          <span className="sim-stat-num">{stats[st.key]}</span>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

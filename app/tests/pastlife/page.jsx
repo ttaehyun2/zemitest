@@ -28,6 +28,7 @@ const JSON_LD = {
   name: "전생 테스트",
   description: "20문항으로 알아보는 나의 전생 무료 심리테스트",
   url: "https://zemitest.com/tests/pastlife",
+  image: "https://zemitest.com/og/pastlife.png",
   inLanguage: "ko-KR",
 };
 

@@ -29,7 +29,8 @@ export default function AdminComments() {
     try {
       const res = await fetch("/api/admin/comments", { headers: { "x-admin-token": t } });
       if (res.status === 401) {
-        setMsg("토큰이 맞지 않아요.");
+        const j = await res.json().catch(() => ({}));
+        setMsg(j.message || "토큰이 맞지 않아요.");
         setAuthed(false);
         sessionStorage.removeItem("zt_admin");
         return;
@@ -90,7 +91,7 @@ export default function AdminComments() {
             type="password"
             placeholder="관리자 토큰"
             value={token}
-            onChange={(e) => setToken(e.target.value)}
+            onChange={(e) => setToken(e.target.value.trim())}
             onKeyDown={(e) => e.key === "Enter" && load(token)}
           />
           <div className="cmt-actions">

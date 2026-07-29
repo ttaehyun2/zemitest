@@ -29,7 +29,7 @@ const config = {
   resultEyebrow: "나의 인생 난이도",
   headline: (r) => `난이도 ${r.level.name}`,
   shareText: (r) =>
-    `내 인생 난이도는 「${r.level.emoji} ${r.level.name}」 (여유 ${r.score}점)\n\n너는 몇 단계 나오는지 해봐 🎮`,
+    `내 인생 난이도는 「${r.level.emoji} ${r.level.name}」 (여유 상위 ${r.top}%)\n\n너는 몇 단계 나오는지 해봐 🎮`,
   disclaimer:
     "이 테스트는 생활 습관과 환경을 가볍게 살펴보는 참고용이며, 삶의 가치를 평가하지 않습니다.",
   footerNote: "친구들과 난이도 비교해보세요 🎮",

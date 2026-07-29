@@ -81,6 +81,7 @@ export default function ArticlePage({ params }) {
     description: article.excerpt,
     datePublished: article.date,
     dateModified: article.date,
+    image: [`https://zemitest.com/og/${article.og || "articles"}.png`],
     inLanguage: "ko-KR",
     author: { "@type": "Organization", name: "제미테스트" },
     publisher: { "@type": "Organization", name: "제미테스트" },
@@ -93,8 +94,17 @@ export default function ArticlePage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* 구글은 OG 이미지가 아니라 페이지 안의 실제 이미지를 썸네일 후보로 봅니다 */}
+      <img
+        className="article-hero"
+        src={`/og/${article.og || "articles"}.png`}
+        alt={article.title}
+        width={1200}
+        height={630}
+      />
+
       <div className="article-head">
-        <p className="page-eyebrow">연애 심리</p>
+        <p className="page-eyebrow">읽을거리</p>
         <h1>{article.title}</h1>
         <p className="article-meta">
           {article.date} · 약 {article.readMin}분 읽기

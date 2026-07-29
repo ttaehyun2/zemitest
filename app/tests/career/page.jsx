@@ -26,7 +26,7 @@ const JSON_LD = {
   "@context": "https://schema.org", "@type": "Quiz",
   name: "직업 가치관 테스트",
   description: "24문항으로 알아보는 직업 가치관 무료 테스트",
-  url: "https://zemitest.com/tests/career", inLanguage: "ko-KR",
+  url: "https://zemitest.com/tests/career", image: "https://zemitest.com/og/career.png", inLanguage: "ko-KR",
 };
 
 export default function Page() {

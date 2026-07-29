@@ -1805,36 +1805,8 @@ button,
 .score-wrap-lg .score-num {
   font-size: 62px;
 }
-.rank-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin: 0 auto 18px;
-  padding: 12px 22px;
-  border-radius: 18px;
-  background: rgba(0, 0, 0, 0.2);
-}
-.rank-top {
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-.rank-sub {
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.9;
-  word-break: keep-all;
-  text-align: center;
-}
-.on-light .rank-badge {
-  background: rgba(255, 255, 255, 0.5);
-}
-.on-light .rank-top,
-.on-light .rank-sub {
-  color: #231343;
-}
-
+.on-light .on-light .rank-top,
+.on-light 
 /* ── 점수형 결과의 강조 문구 (예: 생존 17일) ── */
 .headline-box {
   margin: 6px 0 4px;
@@ -2358,4 +2330,385 @@ button,
     transition: none;
     animation: none;
   }
+}
+
+/* ── 글 상단 배너 이미지 ── */
+.article-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 630;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 26px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+/* ── 인생 시뮬레이션: 한계 돌파 스탯 표시 ── */
+.sim-stat-num {
+  width: 32px;            /* 세 자리·마이너스도 한 줄에 */
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sim-stat-num.over {
+  color: #ffd76f;
+  font-weight: 900;
+}
+.sim-stat-num.minus {
+  color: #ff8a9b;
+  font-weight: 900;
+}
+.sim-stat-track {
+  position: relative;
+}
+.sim-stat-over {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ffd76f, #fff3c4);
+  box-shadow: 0 0 8px rgba(255, 215, 111, 0.8);
+}
+
+.bar-pct {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 34px;
+  text-align: right;
+}
+.bar-pct.over {
+  color: #ffd76f;
+}
+.bar-pct.minus {
+  color: #ff8a9b;
+}
+.bar-track {
+  position: relative;
+}
+.bar-over {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #ffd76f, #fff3c4);
+  box-shadow: 0 0 10px rgba(255, 215, 111, 0.75);
+}
+.over-tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: #ffd76f;
+  color: #231343;
+  font-size: 10px;
+  font-weight: 900;
+  vertical-align: middle;
+}
+.on-light .bar-over,
+.on-light .sim-stat-over {
+  background: linear-gradient(90deg, #b8860b, #d4a017);
+}
+.on-light .bar-pct.over {
+  color: #8a5a00;
+}
+.on-light .bar-pct.minus {
+  color: #a3213a;
+}
+
+/* ── 건강 경고 / 사망 ── */
+
+.death-mark {
+  width: 112px;
+  height: 112px;
+  margin: 12px auto 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.death-emoji {
+  font-size: 52px;
+}
+.death-when {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+.on-light .death-mark {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  }
+
+/* 챕터 전환 시 노화 안내 */
+.fb-aging {
+  margin: -12px 0 22px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #ffb0bd;
+  word-break: keep-all;
+}
+
+/* ── 추가 결과 박스 (채널 유형 등) ── */
+.extra-box {
+  margin: 0 0 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+.extra-label {
+  margin: 0 0 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+.extra-name {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 900;
+  word-break: keep-all;
+}
+.extra-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.75;
+  opacity: 0.95;
+  word-break: keep-all;
+}
+.on-light .extra-box {
+  background: rgba(255, 255, 255, 0.45);
+}
+.on-light .extra-label,
+.on-light .extra-name,
+.on-light .extra-desc {
+  color: #231343;
+}
+
+/* ══════════════════════════════════════════
+   카드·섹션 개선
+   ══════════════════════════════════════════ */
+
+/* 1) 섹션 제목과 설명을 하나로 묶기 */
+.section-head-stack {
+  display: block;
+  margin-bottom: 18px;
+}
+.section-head-stack h2 {
+  margin-bottom: 5px;
+}
+.section-head-stack .section-sub {
+  display: block;
+  margin: 0 0 0 14px;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+
+/* 2) 카드가 적을 때 공간이 비지 않게 */
+.grid {
+  grid-auto-rows: 1fr;
+}
+.grid:has(> :only-child) {
+  grid-template-columns: minmax(0, 520px);
+}
+.grid:has(> :nth-child(2):last-child) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* 3) 카드 상단 색 영역 + 큰 이모지 */
+.tile-card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.tile-head {
+  position: relative;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tile-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 70% 25%,
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+}
+.tile-big-emoji {
+  position: relative;
+  z-index: 1;
+  font-size: 46px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.28));
+  transition: transform 0.28s cubic-bezier(0.34, 1.5, 0.64, 1);
+}
+.tile-card:hover .tile-big-emoji {
+  transform: scale(1.18) rotate(-8deg);
+}
+.tile-body {
+  padding: 20px 22px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.tile-body .tile-meta {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* 4) 가독성·시인성 강화 */
+.tile-desc {
+  color: #ded4f2;
+}
+.tile-card .tile-title {
+  font-size: 17.5px;
+  margin-bottom: 9px;
+}
+.more-btn {
+  border-color: rgba(255, 255, 255, 0.35);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.12);
+}
+.more-btn:hover {
+  background: linear-gradient(120deg, #ffd6a5, #ffb0d8 55%, #c9a5ff);
+  border-color: transparent;
+  color: #231343;
+}
+
+/* 색 헤더가 있는 카드는 기존 상단 하이라이트선 제거 */
+.tile-card::before {
+  display: none;
+}
+
+.section-link {
+  color: #ffd6a5;
+  font-weight: 800;
+}
+.section-link:hover {
+  text-decoration: underline;
+}
+
+/* 읽을거리 카드에도 최소 높이·정렬 통일 */
+.grid > .tile:not(.tile-card) {
+  display: flex;
+  flex-direction: column;
+}
+.grid > .tile:not(.tile-card) .tile-meta {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* ── 상위 % 중심 결과 표시 ── */
+.score-wrap-lg {
+  width: 184px;
+  height: 184px;
+}
+.score-wrap-lg .score-num {
+  font-size: 60px;
+  letter-spacing: -0.03em;
+}
+.score-wrap-lg .score-unit {
+  font-size: 22px;
+  align-self: center;
+  margin-top: 8px;
+}
+.on-light .rank-prefix,
+.on-light 
+/* 예상 등수일 때는 접두어를 조금 작게 */
+
+/* ── 등급 표시 ── */
+.grade-wrap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  margin: 12px auto 14px;
+}
+.grade-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.22));
+}
+.grade-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 8px;
+}
+.grade-label {
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.24);
+  font-size: 12.5px;
+  font-weight: 800;
+}
+.grade-sub {
+  margin: 0 0 18px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+  opacity: 0.85;
+  word-break: keep-all;
+}
+.on-light .grade-label {
+  background: rgba(255, 255, 255, 0.5);
+  color: #231343;
+}
+.on-light .top-prefix,
+.on-light .top-num,
+.on-light .top-unit,
+.on-light .grade-sub {
+  color: #231343;
+}
+@media (max-width: 480px) {
+  .grade-wrap { width: 160px; height: 160px; }
+  }
+
+/* ── 상위 % 중심 표시 ── */
+.grade-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+.top-prefix {
+  font-size: 16px;
+  font-weight: 800;
+  opacity: 0.88;
+  align-self: center;
+  margin-right: 3px;
+}
+.top-num {
+  font-size: 62px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.25);
+}
+.top-unit {
+  font-size: 24px;
+  font-weight: 800;
+  opacity: 0.92;
+}
+.grade-chip {
+  padding: 4px 13px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #231343;
 }

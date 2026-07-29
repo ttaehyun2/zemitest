@@ -20,8 +20,8 @@ export default function Home() {
         나를 알아봅니다
       </h1>
       <p className="page-lead">
-        연애 스타일부터 정치 성향, 경제관까지. 가볍게 테스트하고 결과는 친구들과
-        공유해보세요. 테스트는 재미로, 해설은 진지하게.
+        인생 시뮬레이션부터 눈치·연애·정치 성향까지 17가지. 가볍게 테스트하고
+        결과는 친구들과 공유해보세요. 테스트는 재미로, 해설은 진지하게.
       </p>
 
       {CATEGORIES.map((cat) => {
@@ -29,18 +29,24 @@ export default function Home() {
         if (!items.length) return null;
         return (
           <div key={cat.key}>
-            <div className="section-head">
+            <div className="section-head section-head-stack">
               <h2>{cat.label}</h2>
-              <Link href="/tests">전체 보기 →</Link>
+              <p className="section-sub">
+                {items.filter((t) => t.ready).length}개 ·{" "}
+                <Link href="/tests" className="section-link">전체 보기 →</Link>
+              </p>
             </div>
             <TestGrid tests={items} initial={3} />
           </div>
         );
       })}
 
-      <div className="section-head">
+      <div className="section-head section-head-stack">
         <h2>읽을거리</h2>
-        <Link href="/articles">전체 보기 →</Link>
+        <p className="section-sub">
+          {ARTICLES.length}편 ·{" "}
+          <Link href="/articles" className="section-link">전체 보기 →</Link>
+        </p>
       </div>
       <div className="grid">
         {ARTICLES.slice(0, 3).map((a) => (

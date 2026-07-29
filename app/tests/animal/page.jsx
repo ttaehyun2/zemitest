@@ -28,6 +28,7 @@ const JSON_LD = {
   name: "나와 닮은 동물 테스트",
   description: "22문항으로 알아보는 동물 성격 무료 테스트",
   url: "https://zemitest.com/tests/animal",
+  image: "https://zemitest.com/og/animal.png",
   inLanguage: "ko-KR",
 };
 

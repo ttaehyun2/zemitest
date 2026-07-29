@@ -29,7 +29,7 @@ const config = {
   resultEyebrow: "나의 무인도 생존력",
   headline: (r) => `${toDays(r.score)}일 생존`,
   shareText: (r) =>
-    `나는 무인도에서 ${toDays(r.score)}일 버틴대 「${r.level.emoji} ${r.level.name}」\n\n너는 며칠인지 해봐 🏝️`,
+    `나는 무인도에서 ${toDays(r.score)}일 버틴대 (상위 ${r.top}%)\n「${r.level.emoji} ${r.level.name}」\n\n너는 며칠인지 해봐 🏝️`,
   footerNote: "친구들과 생존 일수 비교해보세요 🏝️",
 };
 

@@ -8,37 +8,10 @@ import Comments from "./Comments";
 import CommentJump from "./CommentJump";
 import SaveImageButton from "./SaveImageButton";
 import ResultStats from "./ResultStats";
+import ScoreResult from "./ScoreResult";
 import { Intro, QuestionCard, ReadyScreen, Bar } from "./QuizShell";
 import { cardToneClass } from "../lib/contrast";
 import { QUESTIONS, AREAS, MAX_PER_AREA, getGrade } from "../lib/moneyTest";
-
-// 점수를 원형 게이지로 표시. 숫자는 정중앙에 배치됩니다.
-function ScoreRing({ value }) {
-  const size = 168;
-  const stroke = 12;
-  const r = (size - stroke) / 2;
-  const circ = 2 * Math.PI * r;
-  const filled = (value / 100) * circ;
-
-  return (
-    <div className="score-wrap">
-      <svg viewBox={`0 0 ${size} ${size}`} className="score-svg" role="img"
-           aria-label={`경제력 점수 ${value}점`}>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none"
-                stroke="rgba(0,0,0,0.18)" strokeWidth={stroke} />
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none"
-                stroke="rgba(255,255,255,0.95)" strokeWidth={stroke}
-                strokeLinecap="round"
-                strokeDasharray={`${filled} ${circ}`}
-                transform={`rotate(-90 ${size / 2} ${size / 2})`} />
-      </svg>
-      <div className="score-center">
-        <span className="score-num">{value}</span>
-        <span className="score-unit">점</span>
-      </div>
-    </div>
-  );
-}
 
 export default function MoneyTest() {
   const [screen, setScreen] = useState("intro");
@@ -103,7 +76,7 @@ export default function MoneyTest() {
           eyebrow="MONEY TEST"
           title={<>나의 경제력은<br />몇 점일까?</>}
           sub={<>저축, 소비 관리, 금융 이해, 위험 대비.<br />4개 영역을 점수로 확인해보세요.</>}
-          meta="24문항 · 100점 만점"
+          meta="24문항 · 상위 % 표시"
           onStart={() => setScreen("quiz")}
         />
       )}
@@ -139,7 +112,7 @@ export default function MoneyTest() {
           >
             <p className="lu-result-eyebrow">나의 경제력 점수</p>
 
-            <ScoreRing value={result.totalPct} />
+            <ScoreResult test="money" score={result.totalPct} label="경제력" />
             <p className="grade-badge">
               {result.grade.emoji} {result.grade.grade}등급
             </p>

@@ -25,11 +25,11 @@ const config = {
       실제 참여자 기준 상위 몇 %인지 알려드려요.
     </>
   ),
-  meta: "20문항 · 100점 만점 · 상위 % 표시",
+  meta: "20문항 · 상위 % 표시",
   scoreLabel: "눈치 점수",
   resultEyebrow: "나의 눈치 점수",
   shareText: (r) =>
-    `나의 눈치 점수는 ${r.score}점 「${r.level.emoji} ${r.level.name}」\n\n너는 몇 점 나오는지 해봐 👀`,
+    `나 눈치 상위 ${r.top}% 나왔다 (${r.grade.g}등급)\n「${r.level.emoji} ${r.level.name}」\n\n너는 상위 몇 %인지 해봐 👀`,
   footerNote: "친구들과 점수 비교해보세요 👀",
 };
 

@@ -19,6 +19,7 @@ const JSON_LD = {
   "@type": "Quiz",
   name: "거짓말 탐지력 테스트 - 나는 알아챌 수 있을까? (무료)",
   url: "https://zemitest.com/tests/liar",
+  image: "https://zemitest.com/og/liar.png",
   inLanguage: "ko-KR",
 };
 

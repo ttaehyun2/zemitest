@@ -40,9 +40,9 @@ export default function TestsPage() {
         if (!items.length) return null;
         return (
           <div key={cat.key}>
-            <div className="section-head">
+            <div className="section-head section-head-stack">
               <h2>{cat.label}</h2>
-              <span className="section-sub">{cat.sub}</span>
+              <p className="section-sub">{cat.sub}</p>
             </div>
             <TestGrid tests={items} initial={3} />
           </div>

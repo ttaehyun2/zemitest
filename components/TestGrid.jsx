@@ -16,20 +16,33 @@ export default function TestGrid({ tests, initial = 3 }) {
     <>
       <div className="grid">
         {tests.map((t, i) => {
-          const cls = `tile${!open && i >= initial ? " tile-hidden" : ""}`;
+          const cls = `tile tile-card${!open && i >= initial ? " tile-hidden" : ""}`;
+          const head = t.grad ? (
+            <div
+              className="tile-head"
+              style={{ background: `linear-gradient(135deg, ${t.grad[0]}, ${t.grad[1]})` }}
+            >
+              <span className="tile-big-emoji">{t.emoji}</span>
+            </div>
+          ) : null;
+
           return t.ready ? (
             <Link key={t.slug} href={t.href} className={cls}>
-              <span className="tile-emoji">{t.emoji}</span>
-              <h3 className="tile-title">{t.title}</h3>
-              <p className="tile-desc">{t.desc}</p>
-              <p className="tile-meta">{t.meta}</p>
+              {head}
+              <div className="tile-body">
+                <h3 className="tile-title">{t.title}</h3>
+                <p className="tile-desc">{t.desc}</p>
+                <p className="tile-meta">{t.meta}</p>
+              </div>
             </Link>
           ) : (
             <div key={t.slug} className={`${cls} soon`}>
-              <span className="tile-emoji">{t.emoji}</span>
-              <h3 className="tile-title">{t.title}</h3>
-              <p className="tile-desc">준비 중입니다.</p>
-              <p className="tile-meta">COMING SOON</p>
+              {head}
+              <div className="tile-body">
+                <h3 className="tile-title">{t.title}</h3>
+                <p className="tile-desc">준비 중입니다.</p>
+                <p className="tile-meta">COMING SOON</p>
+              </div>
             </div>
           );
         })}
