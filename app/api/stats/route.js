@@ -14,6 +14,7 @@ const ALLOWED = {
   career: ["achieve","stable","reward","free","relation","meaning","balance","expert"],
   spending: ["flex","saver","planner","value","impulse","smart","giver","brand"],
   money: ["S", "A", "B", "C", "D"],
+  karma: ["limbo", "heaven1", "heaven2", "heaven3", "heaven4", "heaven5", "heaven6", "heaven7", "heaven8", "heaven9", "hell1", "hell2", "hell3", "hell4", "hell5", "hell6", "hell7", "hell8", "hell9"],
   moral: ["util", "duty", "bond", "guard", "situation", "just"],
   legacy: ["tree", "fire", "candle", "path", "laugh", "make", "stand", "bridge"],
   lifesim: ["starve","prison","forgotten","burnedout","accident","overwork","gaveout","godmode","monster","ruined","collapse","broke","disgraced","hollow",
@@ -59,7 +60,7 @@ function gaussian(x, mean, sd) {
   return Math.exp(-((x - mean) ** 2) / (2 * sd * sd)) / (sd * Math.sqrt(2 * Math.PI));
 }
 
-const SCORE_TESTS = ["nunchi", "difficulty", "island", "social", "liar", "human", "youtube", "money"];
+const SCORE_TESTS = ["nunchi", "difficulty", "island", "social", "liar", "human", "youtube", "money", "princess", "stock"];
 
 export async function PUT(req) {
   try {
