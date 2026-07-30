@@ -33,6 +33,9 @@ export default function TestGrid({ tests, initial = 3 }) {
                 <h3 className="tile-title">{t.title}</h3>
                 <p className="tile-desc">{t.desc}</p>
                 <p className="tile-meta">{t.meta}</p>
+                <span className="tile-cta">
+                  테스트 시작 <span className="tile-cta-arrow">→</span>
+                </span>
               </div>
             </Link>
           ) : (

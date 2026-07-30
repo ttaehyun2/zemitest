@@ -1056,7 +1056,7 @@ a {
 
 /* ── 더보기 ── */
 .tile-hidden {
-  display: none;
+  display: none !important;
 }
 .more-btn {
   display: block;
@@ -2942,3 +2942,145 @@ button,
 .on-light .scale-num.good { color: #1c7a45; }
 .on-light .scale-num.evil { color: #a3213a; }
 .on-light .verdict-box { border-left-color: rgba(35, 19, 67, 0.4); }
+
+/* ── 카드 CTA ── */
+.tile-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 7px 14px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--ink);
+  align-self: flex-start;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+}
+.tile-cta-arrow {
+  transition: transform 0.2s ease;
+}
+.tile-card:hover .tile-cta {
+  background: linear-gradient(120deg, #ffd6a5, #ffb0d8 55%, #c9a5ff);
+  border-color: transparent;
+  color: #231343;
+}
+.tile-card:hover .tile-cta-arrow {
+  transform: translateX(3px);
+}
+/* CTA 가 있으니 메타는 위로 붙임 */
+.tile-body .tile-meta {
+  margin-top: auto;
+  padding-top: 12px;
+  padding-bottom: 0;
+}
+
+/* ── 본문 설명 대비 강화 ── */
+.page-lead {
+  color: #e8e0f8;
+}
+
+/* ══ 테스트 탐색기 (카테고리 탭 + 검색) ══ */
+.browser-bar {
+  margin-bottom: 22px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  word-break: keep-all;
+}
+.tab:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--ink);
+}
+.tab-on {
+  background: linear-gradient(120deg, #ffd6a5, #ffb0d8 55%, #c9a5ff);
+  border-color: transparent;
+  color: #231343;
+}
+.tab-count {
+  padding: 1px 7px;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: 11px;
+  font-weight: 900;
+}
+.tab-on .tab-count {
+  background: rgba(35, 19, 67, 0.16);
+}
+
+.search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 14px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14.5px;
+}
+.search-input::placeholder {
+  color: var(--ink-faint);
+}
+.search-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.search-clear {
+  position: absolute;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--ink);
+  font-size: 12px;
+  cursor: pointer;
+}
+.search-clear:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+.browser-count {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-faint);
+}
+.browser-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-faint);
+  font-size: 14.5px;
+}
