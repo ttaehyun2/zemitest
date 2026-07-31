@@ -3283,3 +3283,168 @@ button,
   font-weight: 900;
   letter-spacing: -0.02em;
 }
+
+/* ── 인기 검색어 태그 ── */
+.search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: 11px;
+}
+.search-tags-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-faint);
+  margin-right: 2px;
+}
+.search-tag {
+  padding: 6px 13px;
+  border-radius: 99px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--ink-dim);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+.search-tag:hover {
+  background: #ffffff;
+  color: #2d1f52;
+  border-color: #ffffff;
+}
+
+/* ── 숫자 띠 (섹션 사이 리듬) ── */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  margin: 26px 0 6px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid var(--line);
+}
+.stat-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 18px 8px;
+  background: rgba(90, 69, 149, 0.82);
+}
+.stat-n {
+  font-size: clamp(21px, 5vw, 27px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #ffd6a5;
+}
+.stat-unit {
+  font-size: 13px;
+  margin-left: 1px;
+  opacity: 0.9;
+}
+.stat-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-dim);
+}
+@media (max-width: 480px) {
+  .stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ══ 모바일 최적화 ══ */
+@media (max-width: 640px) {
+  /* 한 열로 확실히 고정 + 가로형 카드로 높이 절약 */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+    margin-bottom: 30px;
+  }
+  .tile-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .tile-card .tile-head {
+    width: 86px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .tile-card .tile-big-emoji {
+    font-size: 34px;
+  }
+  .tile-card .tile-body {
+    padding: 14px 15px;
+  }
+  .tile-card .tile-title {
+    font-size: 15.5px;
+  }
+  .tile-card .tile-desc {
+    font-size: 13px;
+    /* 모바일에선 설명을 두 줄까지만 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .tile-card .tile-meta {
+    padding-top: 7px;
+  }
+  /* 카드 전체가 터치 영역이므로 CTA 는 화살표만 */
+  .tile-cta {
+    display: none;
+  }
+
+  /* 대표 카드도 같은 형태로 */
+  .tile-feature {
+    grid-column: auto;
+  }
+
+  /* 읽을거리 카드는 세로 유지 */
+  .grid > .tile:not(.tile-card) {
+    padding: 16px 18px;
+  }
+
+  /* 탭·검색 터치 영역 확대 */
+  .tab {
+    padding: 11px 16px;
+    font-size: 14px;
+  }
+  .search-input {
+    padding: 14px 40px;
+    font-size: 15px;
+  }
+  .search-tag {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* 헤더 압축 */
+  .nav {
+    padding: 14px 16px;
+  }
+  .nav-logo-text {
+    font-size: 18px;
+  }
+  .nav-links {
+    gap: 15px;
+  }
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  /* 본문 여백 */
+  .main {
+    padding: 20px 16px 44px;
+  }
+  .page-title {
+    font-size: 28px;
+  }
+  .section-head-stack {
+    margin-top: 26px;
+  }
+}

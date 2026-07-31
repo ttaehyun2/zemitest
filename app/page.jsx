@@ -3,12 +3,12 @@ import { ARTICLES } from "../lib/articles";
 import { TESTS } from "../lib/tests";
 import TestGrid from "../components/TestGrid";
 import HomeSearch from "../components/HomeSearch";
+import StatStrip from "../components/StatStrip";
 
 const CATEGORIES = [
-  { key: "sim", label: "인생 시뮬레이션" },
-  { key: "score", label: "점수·랭킹 테스트" },
-  { key: "psych", label: "심리 테스트" },
-  { key: "value", label: "성향·가치관 테스트" },
+  { key: "self", label: "나는 어떤 사람일까", sub: "성향과 마음을 들여다보는 테스트" },
+  { key: "rank", label: "상위 몇 %일까", sub: "점수와 등수가 나오는 테스트" },
+  { key: "play", label: "게임처럼 즐기기", sub: "선택이 쌓여 결과가 갈리는 테스트" },
 ];
 
 export default function Home() {
@@ -27,7 +27,7 @@ export default function Home() {
 
       <HomeSearch tests={TESTS} />
 
-      {CATEGORIES.map((cat) => {
+      {CATEGORIES.map((cat, ci) => {
         const items = TESTS.filter((t) => t.category === cat.key);
         if (!items.length) return null;
         return (
@@ -40,6 +40,7 @@ export default function Home() {
               </p>
             </div>
             <TestGrid tests={items} initial={3} feature="lifesim" />
+            {ci === 0 && <StatStrip />}
           </div>
         );
       })}

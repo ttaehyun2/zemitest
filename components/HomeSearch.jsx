@@ -42,6 +42,17 @@ export default function HomeSearch({ tests }) {
         )}
       </div>
 
+      {!q.trim() && (
+        <div className="search-tags">
+          <span className="search-tags-label">이런 걸 찾아보세요</span>
+          {["연애", "인생", "눈치", "천국", "유튜버", "전생", "주식", "동물"].map((k) => (
+            <button key={k} className="search-tag" onClick={() => setQ(k)}>
+              {k}
+            </button>
+          ))}
+        </div>
+      )}
+
       {q.trim() && (
         <div className="search-results">
           {hits.length === 0 ? (
