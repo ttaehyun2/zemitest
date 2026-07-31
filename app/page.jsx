@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ARTICLES } from "../lib/articles";
 import { TESTS } from "../lib/tests";
 import TestGrid from "../components/TestGrid";
+import HomeSearch from "../components/HomeSearch";
 
 const CATEGORIES = [
   { key: "sim", label: "인생 시뮬레이션" },
@@ -20,9 +21,11 @@ export default function Home() {
         나를 알아봅니다
       </h1>
       <p className="page-lead">
-        인생 시뮬레이션부터 눈치·연애·정치 성향까지 17가지. 가볍게 테스트하고
-        결과는 친구들과 공유해보세요. 테스트는 재미로, 해설은 진지하게.
+        인생 시뮬레이션부터 눈치·연애·천국지옥까지 21가지. 가입 없이 30초면
+        결과가 나오고, 그대로 친구에게 공유할 수 있습니다.
       </p>
+
+      <HomeSearch tests={TESTS} />
 
       {CATEGORIES.map((cat) => {
         const items = TESTS.filter((t) => t.category === cat.key);
@@ -36,7 +39,7 @@ export default function Home() {
                 <Link href="/tests" className="section-link">전체 보기 →</Link>
               </p>
             </div>
-            <TestGrid tests={items} initial={3} />
+            <TestGrid tests={items} initial={3} feature="lifesim" />
           </div>
         );
       })}

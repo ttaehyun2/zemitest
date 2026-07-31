@@ -8,7 +8,7 @@ import Link from "next/link";
  * 읽을거리와 마찬가지로, 숨긴 항목도 HTML 에는 남겨두고 CSS 로만 감춥니다.
  * (조건부 렌더링으로 빼면 검색엔진이 링크를 못 봅니다)
  */
-export default function TestGrid({ tests, initial = 3 }) {
+export default function TestGrid({ tests, initial = 3, feature }) {
   const [open, setOpen] = useState(false);
   const hidden = Math.max(0, tests.length - initial);
 
@@ -16,7 +16,10 @@ export default function TestGrid({ tests, initial = 3 }) {
     <>
       <div className="grid">
         {tests.map((t, i) => {
-          const cls = `tile tile-card${!open && i >= initial ? " tile-hidden" : ""}`;
+          const isFeature = feature === t.slug;
+          const cls = `tile tile-card${isFeature ? " tile-feature" : ""}${
+            !open && i >= initial ? " tile-hidden" : ""
+          }`;
           const head = t.grad ? (
             <div
               className="tile-head"

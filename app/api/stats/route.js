@@ -54,7 +54,7 @@ function summarize(test, counts) {
 const PRIOR_STRENGTH = 45;  // 가상 참여자 수에 해당
 const PRIOR_MEAN = 58;      // 이런 테스트의 평균적인 점수대
 const PRIOR_SD = 16;
-const RELIABLE = 40;        // 이 인원을 넘으면 추정치 표시를 뗍니다
+const RELIABLE = 10000;        // 이 인원을 넘으면 추정치 표시를 뗍니다
 
 function gaussian(x, mean, sd) {
   return Math.exp(-((x - mean) ** 2) / (2 * sd * sd)) / (sd * Math.sqrt(2 * Math.PI));

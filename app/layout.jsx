@@ -131,7 +131,8 @@ export default function RootLayout({ children }) {
           <header>
             <nav className="nav">
               <Link href="/" className="nav-logo">
-                🧩 제미테스트
+                <span className="nav-logo-mark">🧩</span>
+                <span className="nav-logo-text">제미테스트</span>
               </Link>
               <div className="nav-links">
                 <Link href="/tests">테스트</Link>

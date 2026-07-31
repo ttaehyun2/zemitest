@@ -90,7 +90,7 @@ def wrap_ko(text, font, max_w, draw):
     return lines
 
 
-def make(filename, eyebrow, title, sub, emoji, accent, bg=("#322659", "#443180", "#5e40a4")):
+def make(filename, eyebrow, title, sub, emoji, accent, bg=("#5f4a9c", "#7458bd", "#7f62c8")):
     img = Image.new("RGB", (W, H))
     radial_bg(img, *bg)
     add_stars(img)

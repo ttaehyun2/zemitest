@@ -149,7 +149,7 @@ export default function KarmaTest() {
               </div>
             )}
 
-            {stat && stat.total >= 50 && (
+            {stat && stat.total >= 10000 && (
               <p className="lu-mini lu-center" style={{ marginTop: 12 }}>
                 참여자 중 {stat.dist?.[result.place.key === "limbo" ? "limbo" : `${result.place.key}${result.floor}`]?.pct ?? 0}%가 같은 곳에 배정됐어요
               </p>

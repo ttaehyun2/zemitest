@@ -1,13 +1,13 @@
 :root {
-  /* 전체적으로 한 단계 밝게 조정한 보라 계열 */
-  --bg1: #322659;
-  --bg2: #443180;
-  --bg3: #5e40a4;
-  --ink: #f7f3ff;
-  --ink-dim: #ddd3f5;
-  --ink-faint: #b6a9d8;
-  --line: rgba(255, 255, 255, 0.18);
-  --panel: rgba(255, 255, 255, 0.09);
+  /* 확실히 밝은 보라 계열 (기존보다 두 단계 상향) */
+  --bg1: #5f4a9c;
+  --bg2: #7458bd;
+  --bg3: #7f62c8;
+  --ink: #ffffff;
+  --ink-dim: #f0e9ff;
+  --ink-faint: #ddd2f2;
+  --line: rgba(255, 255, 255, 0.28);
+  --panel: rgba(255, 255, 255, 0.16);
 }
 
 * {
@@ -407,7 +407,7 @@ a {
   z-index: 1;
   width: 100%;
   max-width: 440px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.18);
   border: 1px solid var(--line);
   border-radius: 28px;
   padding: 38px 28px;
@@ -508,7 +508,7 @@ a {
 .lu-progress-bar {
   height: 7px;
   border-radius: 99px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   overflow: hidden;
 }
 .lu-progress-fill {
@@ -552,8 +552,8 @@ a {
   font-weight: 600;
   color: var(--ink);
   line-height: 1.58;
-  background: rgba(255, 255, 255, 0.11);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   transition: transform 0.14s ease, background 0.14s ease,
     border-color 0.14s ease;
   animation: lu-opt 0.4s ease both;
@@ -569,8 +569,8 @@ a {
   }
 }
 .lu-option:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.6);
   transform: translateX(4px);
 }
 .lu-option:focus-visible {
@@ -1351,7 +1351,7 @@ a {
 .cmt-nick,
 .cmt-text {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.14);
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 12px 14px;
@@ -1995,7 +1995,7 @@ button,
   margin: 18px 0 22px;
   padding: 14px;
   border-radius: 14px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.16);
 }
 .sim-stat {
   display: flex;
@@ -2159,8 +2159,8 @@ button,
   transform: translateX(-50%);
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 176, 216, 0.16) 0%,
-    rgba(201, 165, 255, 0.1) 40%,
+    rgba(255, 214, 165, 0.22) 0%,
+    rgba(255, 176, 216, 0.14) 40%,
     transparent 70%
   );
   pointer-events: none;
@@ -2177,8 +2177,8 @@ button,
   overflow: hidden;
   background: linear-gradient(
     160deg,
-    rgba(255, 255, 255, 0.12),
-    rgba(255, 255, 255, 0.05)
+    rgba(255, 255, 255, 0.22),
+    rgba(255, 255, 255, 0.12)
   );
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
   transition: transform 0.18s cubic-bezier(0.3, 0, 0.2, 1),
@@ -2213,7 +2213,12 @@ button,
 }
 .tile:hover {
   transform: translateY(-5px);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.18)
+  );
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
 }
 .tile:hover::after {
   opacity: 1;
@@ -3045,7 +3050,7 @@ button,
   padding: 12px 40px 12px 40px;
   border-radius: 14px;
   border: 1px solid var(--line);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.14);
   color: var(--ink);
   font-family: inherit;
   font-size: 14.5px;
@@ -3083,4 +3088,198 @@ button,
   padding: 40px 20px;
   color: var(--ink-faint);
   font-size: 14.5px;
+}
+
+/* ══════════════════════════════════════════
+   레이아웃 압축 · 시인성 강화
+   ══════════════════════════════════════════ */
+
+/* ── 카드 높이·여백 줄이기 ── */
+.grid {
+  gap: 14px;
+}
+.tile-head {
+  height: 74px;              /* 92 → 74 */
+}
+.tile-big-emoji {
+  font-size: 38px;           /* 46 → 38 */
+}
+.tile-body {
+  padding: 15px 17px 16px;   /* 20/22/22 → 압축 */
+}
+.tile-card .tile-title {
+  font-size: 16.5px;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.tile-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+.tile-body .tile-meta {
+  padding-top: 9px;
+  font-size: 11.5px;
+}
+.tile-cta {
+  margin-top: 9px;
+  padding: 6px 13px;
+  font-size: 12px;
+}
+
+/* ── 그림자 강화 (평평한 느낌 제거) ── */
+.tile {
+  box-shadow: 0 6px 20px rgba(24, 12, 48, 0.32),
+    0 1px 3px rgba(24, 12, 48, 0.2);
+}
+.tile:hover {
+  box-shadow: 0 18px 40px rgba(24, 12, 48, 0.45),
+    0 3px 8px rgba(24, 12, 48, 0.28);
+}
+
+/* ── 「테스트 시작」 버튼 존재감 강화 ── */
+.tile-cta {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #2d1f52;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+.tile-card:hover .tile-cta {
+  background: linear-gradient(120deg, #ffd6a5, #ffb0d8 55%, #c9a5ff);
+  color: #231343;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+}
+
+/* ── 상단 메뉴·로고 키우기 ── */
+.nav-logo {
+  font-size: 21px;
+  gap: 9px;
+}
+.nav-logo-mark {
+  font-size: 24px;
+}
+.nav-links {
+  gap: 22px;
+}
+.nav-links a {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--ink);
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.nav-links a:hover {
+  border-bottom-color: #ffd6a5;
+}
+
+/* ── 대표 카드 (한 칸을 두 칸 폭으로) ── */
+@media (min-width: 760px) {
+  .tile-feature {
+    grid-column: span 2;
+    flex-direction: row;
+  }
+  .tile-feature .tile-head {
+    width: 176px;
+    height: auto;
+    flex-shrink: 0;
+  }
+  .tile-feature .tile-big-emoji {
+    font-size: 56px;
+  }
+  .tile-feature .tile-body {
+    padding: 22px 24px;
+  }
+  .tile-feature .tile-title {
+    font-size: 21px;
+  }
+  .tile-feature .tile-desc {
+    font-size: 14.5px;
+  }
+}
+
+/* ── 홈 검색 ── */
+.home-search {
+  position: relative;
+  margin: 0 0 34px;
+}
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 8px;
+  border-radius: 16px;
+  background: #5a4595;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px rgba(20, 10, 40, 0.5);
+}
+.search-hit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 11px;
+  transition: background 0.14s ease;
+}
+.search-hit:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.search-hit-emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.search-hit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.search-hit-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--ink);
+  word-break: keep-all;
+}
+.search-hit-meta {
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+.search-hit-arrow {
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.search-none {
+  margin: 0;
+  padding: 16px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--ink-faint);
+}
+
+/* ── 더보기 버튼도 카드처럼 ── */
+.more-btn {
+  padding: 14px 26px;
+  border-radius: 16px;
+  font-size: 14.5px;
+  box-shadow: 0 4px 14px rgba(24, 12, 48, 0.28);
+}
+
+/* 섹션 사이 여백 압축 */
+.section-head-stack {
+  margin-top: 34px;
+  margin-bottom: 14px;
+}
+
+/* 로고 */
+.nav-logo {
+  display: inline-flex;
+  align-items: center;
+}
+.nav-logo-text {
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }

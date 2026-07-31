@@ -8,6 +8,10 @@ import { useEffect, useState, useRef } from "react";
  * 저장소(Upstash Redis)가 연결되지 않은 환경에서는 아무것도 표시하지 않고
  * 조용히 넘어갑니다. 즉 설정 전에도 사이트는 정상 동작합니다.
  */
+// 참여자가 이 인원을 넘어야 통계를 표시합니다.
+// 표본이 적을 때의 비율은 의미가 없고 오히려 신뢰를 깎습니다.
+const MIN_SHOW = 10000;
+
 export default function ResultStats({ test, type, typeName }) {
   const [data, setData] = useState(null);
   const sent = useRef(false);
@@ -35,7 +39,7 @@ export default function ResultStats({ test, type, typeName }) {
     };
   }, [test, type]);
 
-  if (!data || !data.total) return null;
+  if (!data || !data.total || data.total < MIN_SHOW) return null;
 
   const mine = data.dist[type];
   if (!mine) return null;

@@ -74,7 +74,7 @@ export default function ScoreResult({ test, score, unit = "점", label }) {
       <p className="grade-sub">
         {label || "점수"} {score}
         {unit}
-        {stat && stat.total >= 50 && (
+        {stat && stat.total >= 10000 && (
           <> · 참여자 {stat.total.toLocaleString()}명 · 평균 {stat.average}{unit}</>
         )}
       </p>

@@ -116,7 +116,7 @@ export default function PrincessTest() {
               <span className="lu-tip-text">{result.level.tip}</span>
             </div>
 
-            {stat && stat.total >= 50 && (
+            {stat && stat.total >= 10000 && (
               <p className="lu-mini lu-center" style={{ marginTop: 14 }}>
                 참여자 {stat.total.toLocaleString()}명 · 평균 {stat.average}점
               </p>
